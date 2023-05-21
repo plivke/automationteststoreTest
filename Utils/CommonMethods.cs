@@ -13,38 +13,39 @@ namespace AutomationFramework.Utils
         /// Metoda koja klikne na element
         /// </summary>
         /// <param name="driver">driver</param>
-        /// <param name="element">element</param>
-        public static void ClickOnElement(IWebDriver driver, By element)
+        /// <param name="elementBy">element</param>
+        public static void ClickOnElement(IWebDriver driver, By elementBy)
         {
-            driver.FindElement(element).Click();
+            driver.FindElement(elementBy).Click();
         }
 
         /// <summary>
         /// Metoda koja upisuje text u element
         /// </summary>
         /// <param name="driver">driver</param>
-        /// <param name="element">element</param>
+        /// <param name="elementBy">element</param>
         /// <param name="text">text koji upisujemo</param>
-        public static void WriteTextToElement(IWebDriver driver, By element, string text)
+        public static void WriteTextToElement(IWebDriver driver, By elementBy, string text)
         {
-            driver.FindElement(element).Clear();
-            driver.FindElement(element).SendKeys(text);
+            driver.FindElement(elementBy).Clear();
+            driver.FindElement(elementBy).SendKeys(text);
         }
 
         /// <summary>
         /// Metoda koja cita text iz elementa
         /// </summary>
-        public static string ReadTextFromElement(IWebDriver driver, By element, uint timeSpan = 10)
+        public static string ReadTextFromElement(IWebDriver driver, By elementBy, uint timeSpan = 10)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeSpan));
-            return driver.FindElement(element).Text;
+            return driver.FindElement(elementBy).Text;
         }
 
         /// <summary>
         /// Metoda koja kreira jedinstvenog korisnika, kreirajuci random broj
         /// kao sufix na "Random User" string
         /// </summary>
-        /// <returns></returns>
+        /// <param name="randomName">osnova za username</param>
+        /// <returns>Vraca slucajan Username</returns>
         public static string GenerateRandomUsername(string randomName)
         {
             int randomNumber = GenerateRandomNumber(1111, 6666);
@@ -67,15 +68,13 @@ namespace AutomationFramework.Utils
         /// Metoda koja proverava da li se element nalazi na stranici
         /// </summary>
         /// <param name="driver">driver</param>
-        /// <param name="element">lokator elementa By</param>
-        /// <returns></returns>
-        public static bool IsElementPresented(IWebDriver driver, By element, uint timeoutInSeconds = 10)
+        /// <param name="elementBy">lokator elementa By</param>
+        /// <returns>Vraca true/false</returns>
+        public static bool IsElementPresented(IWebDriver driver, By elementBy)
         {
             try
             {
-                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                return driver.FindElement(element).Displayed;
-
+                return driver.FindElement(elementBy).Displayed;
             }
             catch (Exception)
             {
@@ -84,31 +83,44 @@ namespace AutomationFramework.Utils
         }
 
         /// <summary>
+        /// Metoda koja konvertuje string cene proizvoda u decimalni tip
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="elementBy"></param>
+        /// <returns>Vraca decimalnu vrednost proizvoda</returns>
+        public static decimal PriceTextToDecimal(IWebDriver driver, By elementBy)
+        {
+            string s = ReadTextFromElement(driver, elementBy);
+            // oznaka za EUR nalazi se na poslednjem indeksu, USD i GBP na nultom
+            if (s.Contains('€'))
+                return decimal.Parse(s.Remove(s.Length - 1));
+            else
+                return decimal.Parse(s.Remove(0, 1));
+        }
+
+        /// <summary>
         /// Metoda koja vraca sve opcije iz select elementa
         /// </summary>
         /// <param name="driver">driver</param>
-        /// <param name="element">lokator elementa</param>
-        /// <returns>Vraca listu opcija iz select elementa</returns>
-        public static List<string> GetAllOptions(IWebDriver driver, By element)
+        /// <param name="elementBy">lokator elementa</param>
+        /// <returns>Vraca listu opcija iz select elementa, u malim slovima</returns>
+        public static List<string> GetAllOptions(IWebDriver driver, By elementBy)
         {
             List<string> optionsList = new List<string>();
-
             try
             {
-                ReadOnlyCollection<IWebElement> options = driver.FindElements(element);
+                ReadOnlyCollection<IWebElement> options = driver.FindElements(elementBy);
 
                 foreach (IWebElement option in options)
                 {
-                    optionsList.Add(option.Text.ToLower());
+                    optionsList.Add(option.Text.Trim().ToLower());
                 }
-
             }
             catch (Exception)
             {
 
                 throw;
             }
-
             return optionsList;
         }
 
@@ -116,7 +128,7 @@ namespace AutomationFramework.Utils
         /// Metoda koja vraca random vrednost iz liste
         /// </summary>
         /// <param name="list">lista</param>
-        /// <returns>vraca random vrednost iz liste</returns>
+        /// <returns>Vraca random vrednost iz liste</returns>
         public static string GetRandomItemFromList(List<string> list)
         {
             Random rnd = new Random();

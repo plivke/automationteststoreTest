@@ -28,9 +28,12 @@ namespace AutomationFramework.Pages
         By welcomeMessageBy = By.XPath("//div[@class='menu_text']");
         By homePageLinkBy = By.LinkText("Home");
         By contactUsLinkBy = By.LinkText("Contact Us");
-        By cartBy = By.XPath("//ul[@id='main_menu_top']/li[@data-id='menu_cart']/a");
         By searchBoxBy = By.Id("filter_keyword");
         By searchButtonBy = By.XPath("//div[@class='button-in-search']");
+        By cartBy = By.XPath("//ul[@id='main_menu_top']/li[@data-id='menu_cart']/a");
+        By cartBadgeBy = By.XPath("//a[@class='dropdown-toggle']/span[contains(@class,'label-orange font14')]");
+        By cartTotalBy = By.XPath("//a[@class='dropdown-toggle']/span[contains(@class,'cart_total')]");
+        By itemPriceBy = By.XPath("(//div[@class='pricetag jumbotron']/a[@data-id='50']/..//div[@class='oneprice'])[1]");
 
         /// <summary>
         /// Metoda koja klikne na Login or register link
@@ -81,12 +84,54 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja u Search Box upisuje ime proizvoda i trazi ga
         /// </summary>
-        /// <param name="itemName"></param>
+        /// <param name="itemName">Ime proizvoda</param>
         public void SearchProduct(string itemName = "New French With Ease")
         {
             Thread.Sleep(500);
             WriteText(searchBoxBy, itemName);
             ClickElement(searchButtonBy);
+        }
+
+        /// <summary>
+        /// Metoda koja kraca broj proizvoda u korpi
+        /// </summary>
+        /// <returns>Broj proizvoda u korpi</returns>
+        public int CartBadgeCount()
+        {
+            Thread.Sleep(200);
+            string s = CommonMethods.ReadTextFromElement(driver, cartBadgeBy);
+            return int.Parse(s);
+        }
+
+        /// <summary>
+        /// Metoda koja vraca ukupnu vrednost korpe
+        /// </summary>
+        /// <returns>Decimalnu vrednost korpe</returns>
+        public decimal GetCartTotal()
+        {
+            return CommonMethods.PriceTextToDecimal(driver, cartTotalBy);
+        }
+
+        /// <summary>
+        /// Metoda koja konvertuje string cene proizvoda u decimalni tip
+        /// </summary>
+        /// <param name="itemId">Proizvod Id</param>
+        /// <returns>Decimalnu vrednost proizvoda</returns>
+        private decimal GetProductPrice(string itemId)
+        {
+            return CommonMethods.PriceTextToDecimal(
+                driver, By.XPath($"(//div[contains(@class, 'pricetag jumbotron')]/a[@data-id={itemId}]/..//div[@class='oneprice'])[1]"));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        public decimal AddToTotal(string itemId)
+        {
+            AddProductFromIndex(itemId);
+            return GetProductPrice(itemId);
         }
 
         /// <summary>
@@ -98,7 +143,5 @@ namespace AutomationFramework.Pages
             Thread.Sleep(500);
             return CommonMethods.ReadTextFromElement(driver, welcomeMessageBy).ToLower();
         }
-
     }
 }
-
