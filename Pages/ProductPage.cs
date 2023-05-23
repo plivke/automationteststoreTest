@@ -25,7 +25,10 @@ namespace AutomationFramework.Pages
 
         // Locators
         By addToCartButtonBy = By.PartialLinkText("Add to Cart");
+        
         By productNameBy = By.XPath("//span[@class='bgnone']");
+        By AddToWishlistBy = By.XPath("//a[contains(@class, 'wishlist_add btn btn-large')]");
+        By removeFromWishlishBy = By.XPath("//a[contains(@class, 'wishlist_remove btn btn-large')]");
 
         public void ClickOnAddToCart() { ClickElement(addToCartButtonBy); }
 
@@ -34,6 +37,22 @@ namespace AutomationFramework.Pages
             Thread.Sleep(200);
             return CommonMethods.ReadTextFromElement(
                 driver, productNameBy).Trim().ToLower();
+        }
+
+        /// <summary>
+        /// Metoda koja klikne na add to wishlist dugme
+        /// </summary>
+        public void AddToWishlist()
+        {
+            ClickElement(AddToWishlistBy);
+        }
+
+        /// <summary>
+        /// Metoda koja klikne na remove from wishlist dugme
+        /// </summary>
+        public void RemoveFromWishlist()
+        {
+            ClickElement(removeFromWishlishBy);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace AutomationFramework.Pages
         By forgottenPasswordBy = By.PartialLinkText("Forgot your password?");
         By forgottenLoginBy = By.PartialLinkText("Forgot your login?");
         By guestCheckoutBy = By.Id("accountFrm_accountguest");
+        By wishlistLinkBy = By.XPath("//a[@data-original-title='My wish list']");
 
         /// <summary>
         /// Metoda koja klikne na Continue dugme za registraciju
@@ -71,6 +72,14 @@ namespace AutomationFramework.Pages
         {
             ClickElement(guestCheckoutBy);
             ClickOnContinue();
+        }
+
+        /// <summary>
+        /// Metoda koja klikne na Wishlist link
+        /// </summary>
+        public void ClickOnWishlistLink()
+        {
+            ClickElement(wishlistLinkBy);
         }
 
         /// <summary>

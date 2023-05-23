@@ -25,6 +25,7 @@ namespace AutomationFramework.Pages
 
         // Locators
         By loginOrRegisterLinkBy = By.LinkText("Login or register");
+        By accountLinkBy = By.LinkText("Account");
         By welcomeMessageBy = By.XPath("//div[@class='menu_text']");
         By homePageLinkBy = By.LinkText("Home");
         By contactUsLinkBy = By.LinkText("Contact Us");
@@ -39,6 +40,11 @@ namespace AutomationFramework.Pages
         /// Metoda koja klikne na Login or register link
         /// </summary>
         public void ClickOnLoginOrRegister() { ClickElement(loginOrRegisterLinkBy); }
+
+        /// <summary>
+        /// Metoda koja klikne na account link
+        /// </summary>
+        public void ClickOnAccountLink() { ClickElement(accountLinkBy); }
 
         /// <summary>
         /// Metoda koja klikne na home page link
