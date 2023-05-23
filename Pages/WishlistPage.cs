@@ -1,9 +1,12 @@
 ﻿using AutomationFramework.Utils;
+using Microsoft.CodeAnalysis;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V111.DOMSnapshot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutomationFramework.Pages
@@ -28,15 +31,33 @@ namespace AutomationFramework.Pages
         }
 
         // Locators
+        By itemNameBy = By.XPath("//tr[2]/td[2]");
+        By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="itemName"></param>
-        public string GetItemName(string itemName)
+        public string GetItemName()
         {
-            return CommonMethods.ReadTextFromElement(
-                 driver, By.LinkText(itemName));
+            return CommonMethods.ReadTextFromElement(driver, itemNameBy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void RemoveItem()
+        {
+            Thread.Sleep(1000);
+            ClickElement(removeButtonBy);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Vraca da li je item u wishlisti</returns>
+        public bool IsItemPresent()
+        {
+            return CommonMethods.IsElementPresented(driver, itemNameBy);
         }
     }
 }

@@ -52,6 +52,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public void RemoveFromWishlist()
         {
+            Thread.Sleep(1000);
             ClickElement(removeFromWishlishBy);
         }
     }

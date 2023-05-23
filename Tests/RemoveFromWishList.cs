@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AutomationFramework.Utils;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutomationFramework.Tests
 {
-    public class WishlistTest : BaseTest
+    public class RemoveFromWishList : BaseTest
     {
         [SetUp]
         public void SetUp()
@@ -17,22 +18,19 @@ namespace AutomationFramework.Tests
             Pages.AccountPage.LoginCustomer(
                 TestData.TestData.Login.username,
                 TestData.TestData.Login.password);
-        }
-        [Test]
-        public void AddToWishlist()
-        {
-            Pages.IndexPage.ClickOnProduct();
-            Pages.ProductPage.ClickOnWishlistLink();
-            Pages.IndexPage.ClickOnAccountLink();
-            Pages.AccountPage.ClickOnWishlistLink();
-
-            
+            Pages.IndexPage.ClickOnHomePageLink();
+            Pages.IndexPage.ClickOnProduct(TestData.TestData.Wishlist.itemName);
+            Pages.ProductPage.AddToWishlist();
         }
         [Test]
         public void RemoveFromWishlist()
         {
+            Pages.ProductPage.RemoveFromWishlist();
+            Pages.IndexPage.ClickOnAccountLink();
+            Pages.AccountPage.ClickOnWishlistLink();
+            // Asertacija
+            Assert.IsTrue(!Pages.WishlistPage.IsItemPresent());
 
         }
-
     }
 }

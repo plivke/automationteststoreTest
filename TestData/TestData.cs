@@ -43,6 +43,11 @@ namespace AutomationFramework.TestData
                 itemId = "68";
         }
 
+        public static class Wishlist
+        {
+            public const string itemName = "Skinsheen Bronzer Stick";
+        }
+
         public static class ContactUs
         {
             public const string
