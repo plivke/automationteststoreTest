@@ -7,11 +7,12 @@ namespace AutomationFramework.Tests
         [Test]
         public void SearchItem()
         {
+            // Upisuje tekst u search bar i trazi proizvod
             string searchItem = TestData.TestData.Search.searchItem.Trim().ToLower();
             Pages.IndexPage.SearchProduct(searchItem);
 
+            // Asertacija - ime pronadjenog proizvoda uporedjujemo sa imenom trazenog proizvoda
             string foundItem = Pages.ProductPage.GetProductName();
-            // Asertacija
             Assert.AreEqual(searchItem, foundItem);
 
         }

@@ -5,39 +5,18 @@ namespace AutomationFramework.Tests
     public class LoginTest : BaseTest
     {
         private static string firstName = TestData.TestData.RegisterUser.firstName;
-        //private static string loginName = CommonMethods.GenerateRandomUsername(firstName);
-        //private static string email = loginName + CommonMethods.GetRandomItemFromList(
-        //    TestData.TestData.RegisterUser.emailSufix);
-
-        //[SetUp]
-        //public void SetUp()
-        //{
-        //    Pages.IndexPage.ClickOnLoginOrRegister();
-        //    Pages.AccountPage.ClickOnContinue();
-        //    Pages.AccountCreatePage.RegisterWithRequiredOnly(
-        //        firstName,
-        //        TestData.TestData.RegisterUser.lastName,
-        //        email,
-        //        TestData.TestData.RegisterUser.address,
-        //        TestData.TestData.RegisterUser.city,
-        //        TestData.TestData.RegisterUser.zipCode,
-        //        loginName,
-        //        TestData.TestData.RegisterUser.password,
-        //        TestData.TestData.RegisterUser.notSubscribed);
-
-
-        //}
 
         [Test]
         public void Login()
         {
+            // Navigiranje na stranicu za login
             Pages.IndexPage.ClickOnLoginOrRegister();
-
+            // Logovanje sa staticnik kredencijalima
             Pages.AccountPage.LoginCustomer(
                 TestData.TestData.Login.username,
                 TestData.TestData.Login.password);
 
-            // Asertacija
+            // Asertacija = provera postojanja poruke za uspesno logovanje
             string expectedMsg = Constants.Messages.Success.welcomeUser + firstName.ToLower();
             string actualMsg = Pages.IndexPage.GetWelcomeMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
@@ -45,6 +24,7 @@ namespace AutomationFramework.Tests
         [TearDown]
         public void TearDown()
         {
+            // Logout korisnika
             Pages.AccountLogoutPage.LogoutCustomer();
         }
     }

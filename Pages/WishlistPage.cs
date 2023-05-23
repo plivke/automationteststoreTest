@@ -1,13 +1,6 @@
 ﻿using AutomationFramework.Utils;
-using Microsoft.CodeAnalysis;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V111.DOMSnapshot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutomationFramework.Pages
 {
@@ -35,15 +28,16 @@ namespace AutomationFramework.Pages
         By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
 
         /// <summary>
-        /// 
+        /// Metoda koja vraca ime 
         /// </summary>
+        /// <returns>Vraca ime proizvoda iz wishlist-e</returns>
         public string GetItemName()
         {
             return CommonMethods.ReadTextFromElement(driver, itemNameBy);
         }
 
         /// <summary>
-        /// 
+        /// Metoda koja sklanja proizvod iz wishlist-e
         /// </summary>
         public void RemoveItem()
         {
@@ -52,9 +46,9 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// 
+        /// Metoda koja proverava da li je wishlist-a prazna
         /// </summary>
-        /// <returns>Vraca da li je item u wishlisti</returns>
+        /// <returns>Vraca da li je item u wishlist-i</returns>
         public bool IsItemPresent()
         {
             return CommonMethods.IsElementPresented(driver, itemNameBy);

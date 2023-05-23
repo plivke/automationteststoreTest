@@ -127,6 +127,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         /// <param name="address2">Second address</param>
         private void EnterAddress2(string address2) { WriteText(address2By, address2); }
+
         /// <summary>
         /// Metoda koja upisuje postanski kod u odgovarajuce input polje
         /// </summary>
@@ -199,10 +200,14 @@ namespace AutomationFramework.Pages
             ClickOnContinue();
         }
 
+        /// <summary>
+        /// Metoda koja vraca poruku o uspehu
+        /// </summary>
+        /// <returns>Vraca poruku o uspehu</returns>
         public string GetSuccessMessage()
         {
             Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(driver, registationSuccessBy).ToLower();
+            return CommonMethods.ReadTextFromElement(driver, registationSuccessBy).Trim().ToLower();
         }
     }
 }

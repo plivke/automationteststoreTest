@@ -28,6 +28,9 @@ namespace AutomationFramework.Pages
         By continueButtonBy = By.XPath("//a[@title='Continue']");
         
 
+        /// <summary>
+        /// Metoda koja odjavljuje korisnika i vraca ga na home page
+        /// </summary>
         public void LogoutCustomer()
         {
             Thread.Sleep(200);

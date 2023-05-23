@@ -130,10 +130,10 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// 
+        /// Metoda koja vraca ukupnu sumu proizvoda
         /// </summary>
-        /// <param name="itemId"></param>
-        /// <returns></returns>
+        /// <param name="itemId">Tekst cene</param>
+        /// <returns>Vraca decimalnu sumu</returns>
         public decimal AddToTotal(string itemId)
         {
             AddProductFromIndex(itemId);

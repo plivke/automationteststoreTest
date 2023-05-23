@@ -5,6 +5,7 @@ namespace AutomationFramework.Tests
 {
     public class ForgottenPasswordTest : BaseTest
     {
+        // generisanje jedinstvenih podataka za registraciju
         private static string firstName = TestData.TestData.RegisterUser.firstName;
         private static string loginName = CommonMethods.GenerateRandomUsername(firstName);
         private static string email = loginName + CommonMethods.GetRandomItemFromList(
@@ -15,6 +16,7 @@ namespace AutomationFramework.Tests
         [SetUp]
         public void SetUp()
         {
+            // registracija korisnika
             Pages.IndexPage.ClickOnLoginOrRegister();
             Pages.AccountPage.ClickOnContinue();
             Pages.AccountCreatePage.RegisterWithRequiredOnly(
@@ -27,6 +29,7 @@ namespace AutomationFramework.Tests
                 loginName,
                 password,
                 TestData.TestData.RegisterUser.notSubscribed);
+            // Logout korisnika iz naloga
             Pages.AccountLogoutPage.LogoutCustomer();
             Pages.IndexPage.ClickOnLoginOrRegister();
 
@@ -35,10 +38,11 @@ namespace AutomationFramework.Tests
         [Test]
         public void ForgottenPassword()
         {
+            // Navigiranje i popunjavanje polja za Forgotten Password
             Pages.AccountPage.ClickOnForgottenPassword();
             Pages.AccountForgottenPage.ForgottenPasswordFillout(loginName, email);
 
-            // Asertacija
+            // Asertacija - provera da li poruka za uspesno resetovanu poruku postoji
             string expectedMsg = Constants.Messages.Success.passwordReset.Trim().ToLower();
             string actualMsg = Pages.AccountForgottenPage.GetSuccessMessage();
             Assert.AreEqual(expectedMsg, actualMsg);

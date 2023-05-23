@@ -25,13 +25,19 @@ namespace AutomationFramework.Pages
 
         // Locators
         By addToCartButtonBy = By.PartialLinkText("Add to Cart");
-        
         By productNameBy = By.XPath("//span[@class='bgnone']");
         By AddToWishlistBy = By.XPath("//a[contains(@class, 'wishlist_add btn btn-large')]");
         By removeFromWishlishBy = By.XPath("//a[contains(@class, 'wishlist_remove btn btn-large')]");
 
+        /// <summary>
+        /// Metoda koja klikne na Add to Cart dugme
+        /// </summary>
         public void ClickOnAddToCart() { ClickElement(addToCartButtonBy); }
 
+        /// <summary>
+        /// Metoda koja vraca ime proizvoda
+        /// </summary>
+        /// <returns>Vraca ime proizvoda</returns>
         public string GetProductName()
         {
             Thread.Sleep(200);

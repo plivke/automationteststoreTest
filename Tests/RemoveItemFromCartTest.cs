@@ -19,13 +19,15 @@ namespace AutomationFramework.Tests
         [Test]
         public void RemoveItemFromCart()
         {
+            // Klikcemo na link za dodavanje u korpu
             Pages.IndexPage.ClickOnCartPageLink();
             bool isCartEmptyBefore = !Pages.CartPage.IsCartNotEmpty();
 
+            // Klikcemo na link za sklanjanje iz korpe
             Pages.CartPage.RemoveItemsFromCart();
             bool isCartEmptyAfter = !Pages.CartPage.IsCartNotEmpty();
 
-            //Asertacija
+            //Asertacija - Uporedjivanje stanja korpe pre i posle sklanjanja
             Assert.AreNotEqual(isCartEmptyBefore, isCartEmptyAfter);
         }
     }
