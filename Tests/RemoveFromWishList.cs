@@ -9,24 +9,22 @@ namespace AutomationFramework.Tests
         {
             // Logovanje korisnika
             Pages.IndexPage.ClickOnLoginOrRegister();
-            Pages.AccountPage.LoginCustomer(
+            Pages.AccountPage.LoginUser(
                 TestData.TestData.Login.username,
                 TestData.TestData.Login.password);
             // Navigiranje na home page i odlazak na stranicu proizvoda
             Pages.IndexPage.ClickOnHomePageLink();
             Pages.IndexPage.ClickOnProduct(TestData.TestData.Wishlist.itemName);
-            // Dodavanje proizvoda u wishlist-u
-            Pages.ProductPage.AddToWishlist();
         }
         [Test]
         public void RemoveFromWishlist()
         {
-            //Sklanjanje proizvoda iz wishlist-e na product strani
-            Pages.ProductPage.RemoveFromWishlist();
-            // Navigiranje na wishlist stranicu
+            // Sklanjanje proizvoda iz wishlist-e na Product stranici
+            Pages.ProductPage.ClickOnRemoveFromWishlist();
+            // Navigiranje na Wishlist stranicu
             Pages.IndexPage.ClickOnAccountLink();
             Pages.AccountPage.ClickOnWishlistLink();
-            // Asertacija - provera da li je wishlist-a prazna
+            // Asertacija - provera da li je Wishlist prazan
             Assert.IsTrue(!Pages.WishlistPage.IsItemPresent());
 
         }

@@ -17,38 +17,49 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Parametarizovani konstruktor
         /// </summary>
-        /// <param name="webDriver">Driver</param>
+        /// <param name="webDriver">driver</param>
         public WishlistPage(IWebDriver webDriver)
         {
             driver = webDriver;
         }
 
         // Locators
-        By itemNameBy = By.XPath("//tr[2]/td[2]");
+        By itemNameBy = By.XPath("//tr[2]/td[2]/a");
         By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
 
         /// <summary>
         /// Metoda koja vraca ime 
         /// </summary>
-        /// <returns>Vraca ime proizvoda iz wishlist-e</returns>
+        /// <returns>ime proizvoda iz Wishlist-e</returns>
         public string GetItemName()
         {
-            return CommonMethods.ReadTextFromElement(driver, itemNameBy);
+            return ReadText(itemNameBy);
         }
 
         /// <summary>
-        /// Metoda koja sklanja proizvod iz wishlist-e
+        /// Metoda koja uklanja prvi proizvod iz Wishlist-e
         /// </summary>
-        public void RemoveItem()
+        private void RemoveItemFromWishlist()
         {
-            Thread.Sleep(1000);
             ClickElement(removeButtonBy);
         }
 
         /// <summary>
-        /// Metoda koja proverava da li je wishlist-a prazna
+        /// Metoda koja uklanja sve proizvode iz Wishlist-e
         /// </summary>
-        /// <returns>Vraca da li je item u wishlist-i</returns>
+        public void RemoveAllItemsFromWishlist()
+        {
+            while (IsItemPresent())
+            {
+                RemoveItemFromWishlist();
+                Thread.Sleep(200);
+            }
+        }
+
+        /// <summary>
+        /// Metoda koja proverava postoji li item u Wishlist-i
+        /// </summary>
+        /// <returns>vraca True ako je proizvod u Wishlist-i</returns>
         public bool IsItemPresent()
         {
             return CommonMethods.IsElementPresented(driver, itemNameBy);

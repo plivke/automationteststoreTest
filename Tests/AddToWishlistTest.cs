@@ -9,7 +9,7 @@ namespace AutomationFramework.Tests
         {
             Pages.IndexPage.ClickOnLoginOrRegister();
 
-            Pages.AccountPage.LoginCustomer(
+            Pages.AccountPage.LoginUser(
                 TestData.TestData.Login.username,
                 TestData.TestData.Login.password);
             Pages.IndexPage.ClickOnHomePageLink();
@@ -18,7 +18,7 @@ namespace AutomationFramework.Tests
         public void AddToWishlist()
         {
             Pages.IndexPage.ClickOnProduct(TestData.TestData.Wishlist.itemName);
-            Pages.ProductPage.AddToWishlist();
+            Pages.ProductPage.ClickOnAddToWishlist();
             Pages.IndexPage.ClickOnAccountLink();
             Pages.AccountPage.ClickOnWishlistLink();
             // Asertacija
@@ -30,7 +30,7 @@ namespace AutomationFramework.Tests
         [TearDown]
         public void TearDown()
         {
-            Pages.WishlistPage.RemoveItem();
+            Pages.WishlistPage.RemoveAllItemsFromWishlist();
         }
     }
 }

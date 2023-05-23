@@ -79,8 +79,7 @@ namespace AutomationFramework.Pages
         /// <returns></returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(driver, successMessageBy).Trim().ToLower();
+            return ReadText(successMessageBy).Trim().ToLower();
         }
     }
 }

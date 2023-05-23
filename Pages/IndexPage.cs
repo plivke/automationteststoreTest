@@ -105,7 +105,7 @@ namespace AutomationFramework.Pages
         public int CartBadgeCount()
         {
             Thread.Sleep(200);
-            string s = CommonMethods.ReadTextFromElement(driver, cartBadgeBy);
+            string s = ReadText(cartBadgeBy);
             return int.Parse(s);
         }
 
@@ -146,8 +146,7 @@ namespace AutomationFramework.Pages
         /// <returns>Welcome user poruka</returns>
         public string GetWelcomeMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(driver, welcomeMessageBy).ToLower();
+            return ReadText(welcomeMessageBy).Trim().ToLower();
         }
     }
 }

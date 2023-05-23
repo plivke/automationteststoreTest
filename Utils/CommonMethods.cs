@@ -1,9 +1,12 @@
 ﻿
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AutomationFramework.Utils
 {
@@ -16,7 +19,19 @@ namespace AutomationFramework.Utils
         /// <param name="elementBy">element</param>
         public static void ClickOnElement(IWebDriver driver, By elementBy)
         {
-            driver.FindElement(elementBy).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(elementBy));
+
+            element.Click();
+        }
+
+        public static void HoverOnElement(IWebDriver driver, By elementBy)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(elementBy));
+
+            Actions action = new Actions(driver);
+            action.MoveToElement(element).Perform();
         }
 
         /// <summary>
@@ -24,20 +39,24 @@ namespace AutomationFramework.Utils
         /// </summary>
         /// <param name="driver">driver</param>
         /// <param name="elementBy">element</param>
-        /// <param name="text">text koji upisujemo</param>
+        /// <param name="text">text koji se upisuje</param>
         public static void WriteTextToElement(IWebDriver driver, By elementBy, string text)
         {
-            driver.FindElement(elementBy).Clear();
-            driver.FindElement(elementBy).SendKeys(text);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(elementBy));
+
+            element.Clear();
+            element.SendKeys(text);
         }
 
         /// <summary>
         /// Metoda koja cita text iz elementa
         /// </summary>
-        public static string ReadTextFromElement(IWebDriver driver, By elementBy, uint timeSpan = 10)
+        public static string ReadTextFromElement(IWebDriver driver, By elementBy)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeSpan));
-            return driver.FindElement(elementBy).Text;
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(elementBy));
+            return element.Text;
         }
 
         /// <summary>
@@ -74,7 +93,10 @@ namespace AutomationFramework.Utils
         {
             try
             {
-                return driver.FindElement(elementBy).Displayed;
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+                var element = wait.Until(ExpectedConditions.ElementIsVisible(elementBy));
+
+                return element.Displayed;
             }
             catch (Exception)
             {
@@ -83,19 +105,19 @@ namespace AutomationFramework.Utils
         }
 
         /// <summary>
-        /// Metoda koja konvertuje string cene proizvoda u decimalni tip
+        /// Metoda koja konvertuje string cene proizvoda u decimalni tip, pri tome
+        /// otklanjajuci simbol valute koja se uz cifre nalazi. Npr. $32.66 => 32.66
         /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="elementBy"></param>
+        /// <param name="driver">driver</param>
+        /// <param name="elementBy">lokator elementa</param>
         /// <returns>Vraca decimalnu vrednost proizvoda</returns>
         public static decimal PriceTextToDecimal(IWebDriver driver, By elementBy)
         {
-            string s = ReadTextFromElement(driver, elementBy);
-            // oznaka za EUR nalazi se na poslednjem indeksu, USD i GBP na nultom
-            if (s.Contains('€'))
-                return decimal.Parse(s.Remove(s.Length - 1));
-            else
-                return decimal.Parse(s.Remove(0, 1));
+            string priceCurrency = ReadTextFromElement(driver, elementBy);
+            char[] currency = Constants.Misc.currencies.Cast<char>().ToArray();
+            decimal price = 0m;
+            decimal.TryParse(priceCurrency.Trim(currency), out price);
+            return price;
         }
 
         /// <summary>

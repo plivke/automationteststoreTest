@@ -58,7 +58,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         /// <param name="username">Username</param>
         /// <param name="password">User password</param>
-        public void LoginCustomer(string username, string password)
+        public void LoginUser(string username, string password)
         {
             EnterLoginName(username);
             EnterLoginPassword(password);

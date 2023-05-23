@@ -13,10 +13,10 @@ namespace AutomationFramework.Tests
             Pages.IndexPage.ClickOnCartPageLink();
         }
         [Test]
-        public void PurchaseLogedIn()
+        public void PurchaseLoggedIn()
         {
             Pages.CartPage.ClickOnCheckout();
-            Pages.AccountPage.LoginCustomer(
+            Pages.AccountPage.LoginUser(
                 TestData.TestData.Login.username,
                 TestData.TestData.Login.password);
             Pages.CheckoutPage.PurchaseInCurency("EUR");

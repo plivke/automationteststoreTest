@@ -26,7 +26,7 @@ namespace AutomationFramework.Pages
         // Locators
         By addToCartButtonBy = By.PartialLinkText("Add to Cart");
         By productNameBy = By.XPath("//span[@class='bgnone']");
-        By AddToWishlistBy = By.XPath("//a[contains(@class, 'wishlist_add btn btn-large')]");
+        By addToWishlistBy = By.XPath("//a[contains(@class, 'wishlist_add btn btn-large')]");
         By removeFromWishlishBy = By.XPath("//a[contains(@class, 'wishlist_remove btn btn-large')]");
 
         /// <summary>
@@ -40,25 +40,32 @@ namespace AutomationFramework.Pages
         /// <returns>Vraca ime proizvoda</returns>
         public string GetProductName()
         {
-            Thread.Sleep(200);
-            return CommonMethods.ReadTextFromElement(
-                driver, productNameBy).Trim().ToLower();
+            return ReadText(productNameBy).Trim().ToLower();
         }
 
         /// <summary>
         /// Metoda koja klikne na add to wishlist dugme
         /// </summary>
-        public void AddToWishlist()
+        public void ClickOnAddToWishlist()
         {
-            ClickElement(AddToWishlistBy);
+            if (!CommonMethods.IsElementPresented(driver, addToWishlistBy))
+            {
+                ClickElement(removeFromWishlishBy);
+            }
+            Thread.Sleep(500);
+            ClickElement(addToWishlistBy);
         }
 
         /// <summary>
         /// Metoda koja klikne na remove from wishlist dugme
         /// </summary>
-        public void RemoveFromWishlist()
+        public void ClickOnRemoveFromWishlist()
         {
-            Thread.Sleep(1000);
+            if (!CommonMethods.IsElementPresented(driver, removeFromWishlishBy))
+            {
+                ClickElement(addToWishlistBy);
+            }
+            Thread.Sleep(500);
             ClickElement(removeFromWishlishBy);
         }
     }

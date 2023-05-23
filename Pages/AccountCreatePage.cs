@@ -1,5 +1,4 @@
-﻿using AutomationFramework.Utils;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
@@ -52,37 +51,37 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja upisuje ime u odgovarajuce input polje
         /// </summary>
-        /// <param name="firstName">First name</param>
+        /// <param name="firstName">ime</param>
         private void EnterFirstName(string firstName) { WriteText(firstNameBy, firstName); }
 
         /// <summary>
         /// Metoda koja upisuje prezime u odgovarajuce input polje
         /// </summary>
-        /// <param name="lastName">Last name</param>
+        /// <param name="lastName">prezime</param>
         private void EnterLastName(string lastName) { WriteText(lastNameBy, lastName); }
 
         /// <summary>
         /// Metoda koja upisuje email u odgovarajuce input polje
         /// </summary>
-        /// <param name="email">Email</param>
+        /// <param name="email">email</param>
         private void EnterEmail(string email) { WriteText(emailBy, email); }
 
         /// <summary>
         /// Metoda koja upisuje broj telefona u odgovarajuce input polje
         /// </summary>
-        /// <param name="telephone">Telephone number</param>
+        /// <param name="telephone">broj telefona</param>
         private void EnterTelephone(string telephone) { WriteText(telephoneBy, telephone); }
 
         /// <summary>
         /// Metoda koja upisuje faks u odgovarajuce input polje
         /// </summary>
-        /// <param name="fax">Fax number</param>
+        /// <param name="fax">broj faksa</param>
         private void EnterFax(string fax) { WriteText(faxBy, fax); }
 
         /// <summary>
         /// Metoda koja upisuje kompaniju u odgovarajuce input polje
         /// </summary>
-        /// <param name="company">Company name</param>
+        /// <param name="company">ime preduzeca</param>
         private void EnterCompany(string company) { WriteText(companyBy, company); }
 
         /// <summary>
@@ -206,8 +205,7 @@ namespace AutomationFramework.Pages
         /// <returns>Vraca poruku o uspehu</returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(driver, registationSuccessBy).Trim().ToLower();
+            return ReadText(registationSuccessBy).Trim().ToLower();
         }
     }
 }

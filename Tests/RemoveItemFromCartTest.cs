@@ -9,7 +9,7 @@ namespace AutomationFramework.Tests
         {
             Pages.IndexPage.ClickOnLoginOrRegister();
 
-            Pages.AccountPage.LoginCustomer(
+            Pages.AccountPage.LoginUser(
                 TestData.TestData.Login.username,
                 TestData.TestData.Login.password);
             Pages.IndexPage.ClickOnHomePageLink();

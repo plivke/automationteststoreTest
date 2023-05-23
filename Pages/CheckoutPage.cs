@@ -34,8 +34,8 @@ namespace AutomationFramework.Pages
         /// <param name="CUR">Curencies: EUR, USD or GBP</param>
         public void SetCurrency(string CUR)
         {
-            ClickElement(currencyListBy);
-            Thread.Sleep(100);
+            CommonMethods.HoverOnElement(driver, currencyListBy);
+            //Thread.Sleep(100);
             ClickElement(By.XPath($"//div[@class='block_6']//a[contains(@href, '{CUR}')]"));
         }
 
@@ -51,7 +51,7 @@ namespace AutomationFramework.Pages
         public void PurchaseInCurency(string CUR)
         {
             SetCurrency(CUR);
-            Thread.Sleep(100);
+            //Thread.Sleep(100);
             ClickOnConfirmOrder();
         }
 
@@ -61,9 +61,8 @@ namespace AutomationFramework.Pages
         /// <returns></returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(
-                driver, orderProcessedMessageBy).Trim().ToLower();
+            //Thread.Sleep(200);
+            return ReadText(orderProcessedMessageBy).Trim().ToLower();
         }
     }
 }

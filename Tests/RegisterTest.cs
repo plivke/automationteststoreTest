@@ -5,7 +5,7 @@ namespace AutomationFramework.Tests
 {
     public class RegisterTest : BaseTest
     {
-        // generacija jedinstvenih polja
+        // Generacija jedinstvenih korisnickih polja
         private static string firstName = TestData.TestData.RegisterUser.firstName;
         private static string loginName = CommonMethods.GenerateRandomUsername(firstName);
         private static string email = loginName + CommonMethods.GetRandomItemFromList(
@@ -14,7 +14,7 @@ namespace AutomationFramework.Tests
         [Test]
         public void Register()
         {
-            // Registracija korisnika NEOPHODNIH podacima za registraciju
+            // Registracija korisnika NEOPHODNIM podacima za registraciju
             Pages.IndexPage.ClickOnLoginOrRegister();
             Pages.AccountPage.ClickOnContinue();
             Pages.AccountCreatePage.RegisterWithRequiredOnly(
@@ -28,10 +28,10 @@ namespace AutomationFramework.Tests
                 TestData.TestData.RegisterUser.password,
                 TestData.TestData.RegisterUser.notSubscribed);
 
-            // Asertacija - provera da li je poruka za uspesnu registraciju prisutna
-            Assert.AreEqual(
-                Constants.Messages.Success.registration,
-                Pages.AccountCreatePage.GetSuccessMessage());
+            // Asertacija = provera postojanja poruke za uspesnu registraciju
+            string expectedMsg = Constants.Messages.Success.registration.Trim().ToLower();
+            string actualMsg = Pages.AccountCreatePage.GetSuccessMessage();
+            Assert.AreEqual(expectedMsg, actualMsg);
         }
     }
 }

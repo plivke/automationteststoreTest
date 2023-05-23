@@ -68,13 +68,11 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja cita tekst za uspesno poslat enquiry
+        /// Metoda koja cita vraca tekst za uspesno poslat enquiry
         /// </summary>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(
-                driver, successfullyBy).Trim().ToLower();
+            return ReadText(successfullyBy).Trim().ToLower();
         }
     }
 }
