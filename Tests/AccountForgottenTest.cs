@@ -1,6 +1,7 @@
 ﻿using AutomationFramework.Utils;
 using NUnit.Framework;
 using System.Linq;
+using System.Security.Policy;
 
 namespace AutomationFramework.Tests
 {

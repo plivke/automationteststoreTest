@@ -10,7 +10,9 @@
                 passwordReset = "×\r\nSuccess: Password reset link has been sent to your e-mail address.",
                 loginRemider = "×\r\nSuccess: Your login name reminder has been sent to your e-mail address.",
                 enquirySent = "Your enquiry has been successfully sent to the store owner!",
-                orderProcessed = " Your Order Has Been Processed!";
+                orderProcessed = " Your Order Has Been Processed!",
+                passwordChanged = "×\r\nSuccess: Your password has been successfully updated.",
+                accountUpdated = "×\r\nSuccess: Your account has been successfully updated.";
         }
 
         public static class ListEmpty

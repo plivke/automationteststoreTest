@@ -35,10 +35,10 @@ namespace AutomationFramework.TestData
         }
         public static class Login
         {
-            public const string
-                username = "Simon9000",
+            public static string
+                username = "GlupoImeDobraEmailAdresa30902",
                 password = "password123",
-                firstName = "Simon";
+                firstName = "Simonce";
         }
 
         public static class Guest

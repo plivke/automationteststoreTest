@@ -29,7 +29,9 @@ namespace AutomationFramework.Utils
         public ProductPage ProductPage => GetPages<ProductPage>();
         public ContactUsPage ContactUsPage => GetPages<ContactUsPage>();
         public CheckoutPage CheckoutPage => GetPages<CheckoutPage>();
-        public GuestCheckoutPage GuestCheckoutPage => GetPages<GuestCheckoutPage>();   
+        public GuestCheckoutPage GuestCheckoutPage => GetPages<GuestCheckoutPage>();
         public WishlistPage WishlistPage => GetPages<WishlistPage>();
+        public ChangePasswordPage ChangePasswordPage => GetPages<ChangePasswordPage>();
+        public AccountEditPage AccountEditPage => GetPages<AccountEditPage>();
     }
 }

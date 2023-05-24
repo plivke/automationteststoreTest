@@ -30,6 +30,8 @@ namespace AutomationFramework.Pages
         readonly By forgottenLoginBy = By.PartialLinkText("Forgot your login?");
         readonly By guestCheckoutBy = By.Id("accountFrm_accountguest");
         readonly By wishlistLinkBy = By.XPath("//a[@data-original-title='My wish list']");
+        readonly By passwordChangeLinkBy = By.XPath("//a[contains(@data-original-title, 'Change password')]");
+        readonly By editAccountLinkBy = By.XPath("//a[contains(@data-original-title, 'Edit account details')]");
 
         /// <summary>
         /// Metoda koja klikne na Continue dugme za registraciju
@@ -83,9 +85,22 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
+        /// Metoda koja klikne na Change password link
+        /// </summary>
+        public void ClickOnChangePasswordLink()
+        {
+            ClickElement(passwordChangeLinkBy);
+        }
+
+        /// <summary>
         ///Metoda koja klikne na link za izgubljenu sifru
         /// </summary>
         public void ClickOnForgottenPassword() { ClickElement(forgottenPasswordBy); }
+
+        /// <summary>
+        /// Metoda koja klikne na link za editovanje naloga
+        /// </summary>
+        public void ClickOnEditAccountLink() { ClickElement(editAccountLinkBy); }
 
         /// <summary>
         /// Metoda koja klikne na link za izgubljene kredencijale
