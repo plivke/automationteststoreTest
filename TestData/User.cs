@@ -8,17 +8,17 @@ namespace AutomationFramework.TestData
         public static class Registration
         {
             public const string
-                firstName = "GlupoImeDobraEmailAdresa",
-                lastName = "Antonino",
-                email = "mrAntonino22@yahoo.com",
+                firstName = "Simon",
+                lastName = "Says",
+                email = "mrAntonino812@yahoo.com",
                 address = "Ulica Bezbrojna 31",
                 city = "Grad greha",
                 country = "",
                 regionState = "",
                 zipCode = "49000",
                 telephone = "00381631072590",
-                loginName = "Marco72",
-                password = "password123";
+                loginName = "simonito",
+                password = "simonito"; //simonito53155
 
             public const bool
                 subscribed = true,
@@ -36,9 +36,9 @@ namespace AutomationFramework.TestData
         public static class Login
         {
             public static string
-                username = "GlupoImeDobraEmailAdresa30902",
-                password = "password123",
-                firstName = "Simon",
+                username = "lukac",
+                password = "lukac",
+                firstName = "Luka",
                 wrongusername = "Simon9001",
                 wrongpassword = "wrongpass";
         }
@@ -62,8 +62,34 @@ namespace AutomationFramework.TestData
         public static class AccountForgotten
         {
             public static string
+                firstName = "Simon",
+                lastName = "Says",
+                email = "mrAntonino812@yahoo.com",
+                address = "Ulica Bezbrojna 31",
+                city = "Grad greha",
+                country = "",
+                regionState = "",
+                zipCode = "49000",
+                telephone = "00381631072590",
+                loginName = "simonito",
+                password = "simonito",
                 forgottenEmail = "",
                 forgottenLastName = "";
+        }
+
+        public static class AccountEdit
+        {
+            public static string
+                username = "webersmark2",
+                password = "webersmark2",
+                firstName = "Mark",
+                lastName = "Webber",
+                email = "webbersmark2@yahoo.com",
+                telephone1 = "00231353421",
+                telephone2 = "1199310",
+                address1 = "Middle of Nowhere 22",
+                city = "Sin City",
+                fax = "";
         }
     }
 }

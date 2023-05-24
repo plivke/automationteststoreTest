@@ -72,8 +72,11 @@ namespace AutomationFramework.Pages
         /// <param name="itemId">Id proizvoda</param>
         public void AddProductFromIndex(string itemId = "50")
         {
-            //Thread.Sleep(500);
-            ClickElement(By.XPath($"//a[@data-id='{itemId}']"));
+            Thread.Sleep(500);
+            By item = By.XPath($"//a[@data-id='{itemId}']");
+
+            if (CommonMethods.IsElementPresented(_driver, item))
+                ClickElement(item);
         }
 
         /// <summary>

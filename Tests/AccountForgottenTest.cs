@@ -8,10 +8,10 @@ namespace AutomationFramework.Tests
     public class AccountForgottenTest : BaseTest
     {
         // Generisanje jedinstvenih podataka za registraciju
-        static string _firstName = TestData.User.Registration.firstName;
+        static string _firstName = TestData.User.AccountForgotten.firstName;
         static string _loginName = CommonMethods.GenerateRandomUsername(_firstName);
-        string _lastName = TestData.User.Registration.lastName;
-        string _password = TestData.User.Registration.password;
+        string _lastName = TestData.User.AccountForgotten.lastName;
+        string _password = TestData.User.AccountForgotten.password;
         string _email = _loginName +
             CommonMethods.GetRandomItemFromList((TestData.User.Registration.emailSufix).ToList());
 
@@ -27,9 +27,9 @@ namespace AutomationFramework.Tests
                 _firstName,
                 _lastName,
                 _email,
-                TestData.User.Registration.address,
-                TestData.User.Registration.city,
-                TestData.User.Registration.zipCode,
+                TestData.User.AccountForgotten.address,
+                TestData.User.AccountForgotten.city,
+                TestData.User.AccountForgotten.zipCode,
                 _loginName,
                 _password,
                 TestData.User.Registration.notSubscribed);

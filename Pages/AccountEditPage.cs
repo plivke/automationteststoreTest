@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -22,56 +23,70 @@ namespace AutomationFramework.Pages
         }
 
         // Locators
-        readonly By firstNameBy = By.Id("AccountFrm_firstname");
-        readonly By lastNameBy = By.Id("AccountFrm_lastname");
-        readonly By emailBy = By.Id("AccountFrm_email");
+        //readonly By firstNameBy = By.Id("AccountFrm_firstname");
+        //readonly By lastNameBy = By.Id("AccountFrm_lastname");
+        //readonly By emailBy = By.Id("AccountFrm_email");
         readonly By telephoneBy = By.Id("AccountFrm_telephone");
         readonly By faxBy = By.Id("AccountFrm_fax");
         readonly By continueButtonBy = By.XPath("//button[@title='Continue']");
 
-        /// <summary>
-        /// Metoda koja menja ime korisnika
-        /// </summary>
-        /// <param name="firstName">Ime</param>
-        private void EnterFirstName(string firstName)
-        {
-            WriteText(firstNameBy, firstName);
-        }
+        ///// <summary>
+        ///// Metoda koja menja ime korisnika
+        ///// </summary>
+        ///// <param name="firstName">Ime</param>
+        //private void EnterFirstName(string firstName)
+        //{
+        //    WriteText(firstNameBy, firstName);
+        //}
+
+        ///// <summary>
+        ///// Metoda koja menja prezime korisnika
+        ///// </summary>
+        ///// <param name="lastName">Prezime</param>
+        //public void EnterLastName(string lastName)
+        //{
+        //    WriteText(lastNameBy, lastName);
+        //}
+
+        ///// <summary>
+        ///// Metoda koja menja email korisnika
+        ///// </summary>
+        ///// <param name="email">Korisnicki email</param>
+        //public void EnterEmail(string email)
+        //{
+        //    WriteText(emailBy, email);
+        //}
 
         /// <summary>
-        /// Metoda koja menja prezime korisnika
+        /// Metoda koja vraca string iz telephone polja
         /// </summary>
-        /// <param name="lastName">Prezime</param>
-        private void EnterLastName(string lastName)
+        /// <returns></returns>
+        public string GetTelephone()
         {
-            WriteText(lastNameBy, lastName);
-        }
-
-        /// <summary>
-        /// Metoda koja menja email korisnika
-        /// </summary>
-        /// <param name="email">Korisnicki email</param>
-        private void EnterEmail(string email)
-        {
-            WriteText(emailBy, email);
+            return ReadValue(telephoneBy);
         }
 
         /// <summary>
         /// Metoda koja menja broj telefona korisnika
         /// </summary>
-        /// <param name="telephone">Broj telefona</param>
-        private void EnterTelephone(string telephone)
+        /// <param name = "newTelephone" > Broj telefona</param>
+        public string EnterTelephone(string newTelephone)
         {
-            WriteText(telephoneBy, telephone);
+            string oldTelephone = GetTelephone();
+            Thread.Sleep(1000);
+            WriteText(telephoneBy, newTelephone);
+            return oldTelephone;
         }
 
         /// <summary>
         /// Metoda koja menja broj faksa korisnika
         /// </summary>
-        /// <param name="fax">Broj faksa</param>
-        private void EnterFax(string fax)
+        /// <param name = "newFax" > Broj faksa</param>
+        public string EnterFax(string newFax)
         {
-            WriteText(faxBy, fax);
+            string oldFax = ReadText(faxBy);
+            WriteText(telephoneBy, newFax);
+            return oldFax;
         }
 
         /// <summary>
@@ -81,7 +96,5 @@ namespace AutomationFramework.Pages
         {
             ClickElement(continueButtonBy);
         }
-
-
     }
 }

@@ -10,7 +10,7 @@ namespace AutomationFramework.Tests
         static readonly string _firstName = TestData.User.Registration.firstName;
         static readonly string _loginName = CommonMethods.GenerateRandomUsername(_firstName);
         static readonly string _email = _loginName + CommonMethods.GetRandomItemFromList(
-        TestData.User.Registration.emailSufix.ToList<string>());
+        TestData.User.Registration.emailSufix.ToList());
 
         [Test]
         public void Register()

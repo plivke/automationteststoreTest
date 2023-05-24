@@ -65,6 +65,15 @@ namespace AutomationFramework.Utils
         }
 
         /// <summary>
+        /// Metoda koja cita text iz elementa
+        /// </summary>
+        public static string ReadValueFromElement(IWebDriver driver, By elementBy)
+        {
+            return WaitElementVisibility(driver, elementBy).GetAttribute("value");
+        }
+
+
+        /// <summary>
         /// Metoda koja po indeksu bira jedan slucajan podelement Select-a
         /// </summary>
         /// <param name="driver">Driver</param>
