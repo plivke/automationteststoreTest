@@ -34,5 +34,28 @@ namespace AutomationFramework.Tests
             string actualMsg = Pages.AccountCreatePage.GetSuccessMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
         }
+
+        [Test]
+        public void RegisterExisitingEmail()
+        {
+            // Registracija korisnika neophodnim podacima za registraciju (vec registrovan email)
+            Pages.IndexPage.ClickOnLoginOrRegister();
+            Pages.AccountPage.ClickOnContinue();
+            Pages.AccountCreatePage.RegisterWithRequiredOnly(
+                TestData.User.Registration.firstName,
+                TestData.User.Registration.lastName,
+                TestData.User.Registration.email,
+                TestData.User.Registration.address,
+                TestData.User.Registration.city,
+                TestData.User.Registration.zipCode,
+                _loginName,
+                TestData.User.Registration.password,
+                TestData.User.Registration.notSubscribed);
+
+            // Asertacija - provera postojanja poruke za neuspesnu registraciju
+            string expectedMsg = Constants.Messages.Error.emailAdressError;
+            string actualMsg = Pages.AccountCreatePage.GetErrorMessage();
+            Assert.AreEqual(expectedMsg, actualMsg);
+        }
     }
 }

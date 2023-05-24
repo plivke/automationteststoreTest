@@ -38,7 +38,9 @@ namespace AutomationFramework.TestData
             public static string
                 username = "GlupoImeDobraEmailAdresa30902",
                 password = "password123",
-                firstName = "Simonce";
+                firstName = "Simon",
+                wrongusername = "Simon9001",
+                wrongpassword = "wrongpass";
         }
 
         public static class Guest

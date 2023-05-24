@@ -22,5 +22,11 @@
                 wishlist = "\r\n\r\n\tWish list is empty\t\r\n\t";
 
         }
+
+        public static class Error
+        {
+            public const string incorrectlogin = "×\r\nError: Incorrect login or password provided.",
+                                emailAdressError = "×\r\nError: E-Mail Address is already registered!";
+        }
     }
 }
