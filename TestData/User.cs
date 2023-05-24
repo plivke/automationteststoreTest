@@ -38,7 +38,9 @@ namespace AutomationFramework.TestData
             public const string
                 username = "Simon9000",
                 password = "password123",
-                firstName = "Simon";
+                firstName = "Simon",
+                wrongusername = "Simon9001",
+                wrongpassword = "wrongpass";
         }
 
         public static class Guest

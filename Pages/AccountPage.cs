@@ -30,6 +30,7 @@ namespace AutomationFramework.Pages
         readonly By forgottenLoginBy = By.PartialLinkText("Forgot your login?");
         readonly By guestCheckoutBy = By.Id("accountFrm_accountguest");
         readonly By wishlistLinkBy = By.XPath("//a[@data-original-title='My wish list']");
+        readonly By errormessageBy= By.XPath("//div[contains(@class,'alert alert-error alert-danger')]");
 
         /// <summary>
         /// Metoda koja klikne na Continue dugme za registraciju
@@ -91,6 +92,15 @@ namespace AutomationFramework.Pages
         /// Metoda koja klikne na link za izgubljene kredencijale
         /// </summary>
         public void ClickOnForgottenLogin() { ClickElement(forgottenLoginBy); }
+
+        /// <summary>
+        /// Metoda koja vraca poruku o neuspesnom login-u korisnika
+        /// </summary>
+        /// <returns>Vraca poruku o neuspesnom login-u</returns>
+        public string GetErrorLoginMessage()
+        {
+            return ReadText(errormessageBy);
+        }
 
     }
 }
