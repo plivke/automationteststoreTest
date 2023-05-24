@@ -20,18 +20,26 @@ namespace AutomationFramework.Tests
                 string itemId = CommonMethods.GetRandomItemFromList(itemIds);
                 Pages.IndexPage.AddProductFromIndex(itemId);
             }
+
+            //Klik na link korpe
             Pages.IndexPage.ClickOnCartPageLink();
         }
 
         [Test]
         public void PurchaseLoggedIn()
         {
+            //Klik na dugme za kupovinu
             Pages.CartPage.ClickOnCheckout();
+
+            //Login korisnika
             Pages.AccountPage.LoginUser(
                 TestData.User.Login.username,
                 TestData.User.Login.password);
+
+            //Kupovina proizvoda u EUR valuti
             Pages.CheckoutPage.PurchaseInCurency("EUR");
-            // Asertacija
+
+            // Asertacija(Provera da li je kupovina uspesna)
             string expectedMsg = Constants.Messages.Success.orderProcessed.Trim().ToLower();
             string actualMsg = Pages.CheckoutPage.GetSuccessMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
@@ -39,9 +47,15 @@ namespace AutomationFramework.Tests
 
         [Test]
         public void PurchaseAsGuest()
-        {
+        { 
+            
+            //Klik na dugme za kupovinu
             Pages.CartPage.ClickOnCheckout();
+
+            //Guest kupovina
             Pages.AccountPage.GuestCheckout();
+
+            //Upis podataka na formu
             Pages.GuestCheckoutPage.GuestCheckoutForm(
                 TestData.User.Guest.firstName,
                 TestData.User.Guest.lastName,
@@ -51,8 +65,12 @@ namespace AutomationFramework.Tests
                 TestData.User.Guest.country,
                 TestData.User.Guest.regionState,
                 TestData.User.Guest.zipCode);
+
+            //Kupovina proizvoda u GBP valuti
             Pages.CheckoutPage.PurchaseInCurency("GBP");
-            // Asertacija
+
+
+            // Asertacija(Provera da li je kupovina uspesna)
             string expectedMsg = Constants.Messages.Success.orderProcessed.Trim().ToLower();
             string actualMsg = Pages.CheckoutPage.GetSuccessMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
@@ -60,6 +78,7 @@ namespace AutomationFramework.Tests
         [TearDown]
         public void TearDown()
         {
+            //Logout korisnika
             Pages.AccountLogoutPage.LogoutCustomer();
         }
     }
