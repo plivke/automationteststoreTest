@@ -27,7 +27,7 @@ namespace AutomationFramework.Tests
             Pages.CartPage.RemoveItemsFromCart();
             bool isCartEmptyAfter = !Pages.CartPage.IsCartNotEmpty();
 
-            //Asertacija - Uporedjivanje stanja korpe pre i posle sklanjanja
+            // Asertacija - uporedjivanje stanja korpe pre i posle sklanjanja
             Assert.AreNotEqual(isCartEmptyBefore, isCartEmptyAfter);
         }
     }

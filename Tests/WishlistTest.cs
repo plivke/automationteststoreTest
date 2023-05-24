@@ -6,7 +6,8 @@ namespace AutomationFramework.Tests
 {
     public class WishlistTest : BaseTest
     {
-        readonly static string _itemName =
+        // Uzimanje slucajno odabranog imena na koji se klikne
+        static readonly string _itemName =
             CommonMethods.GetRandomItemFromList((TestData.Wishlist.Items.itemName).ToList());
 
         [SetUp]
@@ -24,11 +25,11 @@ namespace AutomationFramework.Tests
         [Test]
         public void AddToWishlist()
         {
-            // Dodavanje proizvoda u wishlist-u na Product stranici
+            // Dodavanje proizvoda u Wishlist-u na Product stranici
             Pages.ProductPage.ClickOnAddToWishlist();
             Pages.IndexPage.ClickOnAccountLink();
             Pages.AccountPage.ClickOnWishlistLink();
-            // Asertacija
+            // Asertacija - provera da li je isti proizvod dodat u Wishlist-u
             string itemName = Pages.WishlistPage.GetItemName();
             Assert.AreEqual(_itemName, itemName);
         }
@@ -44,12 +45,6 @@ namespace AutomationFramework.Tests
 
             //Asertacija - provera da li je Wishlist prazan
             Assert.IsTrue(!Pages.WishlistPage.IsItemPresent());
-
-            //Asertacija - provera poruke da je Wishlista prazna
-            //string expectedMsg = Constants.Messages.ListEmpty.wishlist.Trim().ToLower();
-            //string actualMsg = Pages.WishlistPage.GetWishlistEmptyMessage();
-            //Assert.AreEqual(expectedMsg, actualMsg);
-
 
         }
         [TearDown]

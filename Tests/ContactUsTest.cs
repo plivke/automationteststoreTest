@@ -7,10 +7,10 @@ namespace AutomationFramework.Tests
         [Test]
         public void ContactUs()
         {
-            //Klik na ContactUs link
+            // Klik na ContactUs link
             Pages.IndexPage.ClickOnContactUs();
 
-            //Popunjavanje forme
+            // Popunjavanje forme
             Pages.ContactUsPage.FilloutContactUsForm(
                 TestData.ContactUs.Form.firstName,
                 TestData.ContactUs.Form.email,

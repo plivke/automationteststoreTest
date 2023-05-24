@@ -225,7 +225,7 @@ namespace AutomationFramework.Pages
         /// Metoda koja vraca poruku o uspehu registracije korisnika.
         /// Kopija poruke je trim-ovana i lowercase-ovana
         /// </summary>
-        /// <returns>vraca poruku o uspehu</returns>
+        /// <returns>poruku o uspehu</returns>
         public string GetSuccessMessage()
         {
             return ReadText(registationSuccessBy).Trim().ToLower();
@@ -234,7 +234,7 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja vraca poruku o neuspesnoj registraciji korisnika
         /// </summary>
-        /// <returns>Vraca poruku o neuspesnoj registraciji</returns>
+        /// <returns>poruku o neuspesnoj registraciji</returns>
         public string GetErrorMessage()
         {
             return ReadText(registrationFailedBy);

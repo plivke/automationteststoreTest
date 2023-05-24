@@ -7,15 +7,15 @@ namespace AutomationFramework.Tests
         [Test]
         public void CartCountValidation()
         {
-            //Promenjliva u kojoj se cuva podatak koliko je proizvoda bilo u korpi
+            // Promenjliva u kojoj se cuva podatak koliko je proizvoda bilo u korpi
             byte beforeAddToCart = Pages.IndexPage.CartBadgeCount();
 
-            //Dodavanje proizvoda u korpu preko njegovog indeksa
+            // Dodavanje proizvoda u korpu preko njegovog indeksa
             Pages.IndexPage.AddProductFromIndex("50");
             Pages.IndexPage.AddProductFromIndex("50");
             Pages.IndexPage.AddProductFromIndex("66");
 
-            //Promenljiva u kojoj se cuva podatak koliko je proizvoda u korpi nakon dodavanja
+            // Promenljiva u kojoj se cuva podatak koliko je proizvoda u korpi nakon dodavanja
             byte afterAddToCart = Pages.IndexPage.CartBadgeCount();
 
 
@@ -26,15 +26,15 @@ namespace AutomationFramework.Tests
         [Test]
         public void CartTotalValidation()
         {
-            //Decimal promenljiva koja cuva podatak o zbiru cena proizvoda pre dodavanja novih
+            // Decimal promenljiva koja cuva podatak o zbiru cena proizvoda pre dodavanja novih
             decimal expectedTotal = Pages.IndexPage.GetCartTotal();
 
-            //Dodavanje novih proizvoda i povecanje vrednosti promenjlive expectedTotal
+            // Dodavanje novih proizvoda i povecanje vrednosti promenjlive expectedTotal
             expectedTotal += Pages.IndexPage.AddToTotal("50");
             expectedTotal += Pages.IndexPage.AddToTotal("50");
             expectedTotal += Pages.IndexPage.AddToTotal("66");
 
-            //Decimal promenljiva koja cuva podatak o zbiru cena proizvoda nakon dodavanja novih
+            // Decimal promenljiva koja cuva podatak o zbiru cena proizvoda nakon dodavanja novih
             decimal actualTotal = Pages.IndexPage.GetCartTotal();
 
 

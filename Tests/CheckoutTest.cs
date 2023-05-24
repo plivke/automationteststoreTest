@@ -21,22 +21,22 @@ namespace AutomationFramework.Tests
                 Pages.IndexPage.AddProductFromIndex(itemId);
             }
 
-            //Klik na link korpe
+            // Klik na link korpe
             Pages.IndexPage.ClickOnCartPageLink();
         }
 
         [Test]
         public void PurchaseLoggedIn()
         {
-            //Klik na dugme za kupovinu
+            // Klik na dugme za kupovinu
             Pages.CartPage.ClickOnCheckout();
 
-            //Login korisnika
+            // Login korisnika
             Pages.AccountPage.LoginUser(
                 TestData.User.Login.username,
                 TestData.User.Login.password);
 
-            //Kupovina proizvoda u EUR valuti
+            // Kupovina proizvoda u EUR valuti
             Pages.CheckoutPage.PurchaseInCurency("EUR");
 
             // Asertacija(Provera da li je kupovina uspesna)
@@ -49,13 +49,13 @@ namespace AutomationFramework.Tests
         public void PurchaseAsGuest()
         { 
             
-            //Klik na dugme za kupovinu
+            // Klik na dugme za kupovinu
             Pages.CartPage.ClickOnCheckout();
 
-            //Guest kupovina
+            // Guest kupovina
             Pages.AccountPage.GuestCheckout();
 
-            //Upis podataka na formu
+            // Upis podataka na formu
             Pages.GuestCheckoutPage.GuestCheckoutForm(
                 TestData.User.Guest.firstName,
                 TestData.User.Guest.lastName,
@@ -66,7 +66,7 @@ namespace AutomationFramework.Tests
                 TestData.User.Guest.regionState,
                 TestData.User.Guest.zipCode);
 
-            //Kupovina proizvoda u GBP valuti
+            // Kupovina proizvoda u GBP valuti
             Pages.CheckoutPage.PurchaseInCurency("GBP");
 
 
@@ -78,7 +78,7 @@ namespace AutomationFramework.Tests
         [TearDown]
         public void TearDown()
         {
-            //Logout korisnika
+            // Logout korisnika
             Pages.AccountLogoutPage.LogoutCustomer();
         }
     }

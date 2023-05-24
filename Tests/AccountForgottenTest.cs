@@ -1,13 +1,12 @@
 ﻿using AutomationFramework.Utils;
 using NUnit.Framework;
 using System.Linq;
-using System.Security.Policy;
 
 namespace AutomationFramework.Tests
 {
     public class AccountForgottenTest : BaseTest
     {
-        // Generisanje jedinstvenih podataka za registraciju
+        // Generisanje slucajnih podataka za registraciju
         static string _firstName = TestData.User.AccountForgotten.firstName;
         static string _loginName = CommonMethods.GenerateRandomUsername(_firstName);
         string _lastName = TestData.User.AccountForgotten.lastName;

@@ -14,10 +14,11 @@ namespace AutomationFramework.TestData
             public static readonly IEnumerable<string> itemName =
                 new List<string>()
                 {
-                    "Skinsheen Bronzer Stick", "BeneFit Girl Meets Pearl",
+                    // Commented items are *curently* OUT OF STOCK
+                    "Skinsheen Bronzer Stick", /*"BeneFit Girl Meets Pearl",*/
                     "Benefit Bella Bamba", "Tropiques Minerale Loose Bronzer",
                     "Absolute Anti-Age Spot Replenishing Unifying TreatmentSPF 15",
-                    "Flash Bronzer Body Gel", "Total Moisture Facial Cream",
+                    /*"Flash Bronzer Body Gel",*/ "Total Moisture Facial Cream",
                     "New French With Ease (1 book + 1 mp3 CD)", "Total Moisture Facial Cream"
                 };
         }

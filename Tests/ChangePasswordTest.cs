@@ -6,7 +6,7 @@ namespace AutomationFramework.Tests
 {
     public class ChangePasswordTest : BaseTest
     {
-        // Generacija slucajnih korisnickih polja
+        // Generisanje slucajnih korisnickih polja
         static readonly string _firstName = TestData.User.Registration.firstName;
         static readonly string _loginName = CommonMethods.GenerateRandomUsername(_firstName);
         static readonly string _email = _loginName + CommonMethods.GetRandomItemFromList(

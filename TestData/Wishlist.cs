@@ -11,11 +11,10 @@ namespace AutomationFramework.TestData
                 {
                     "Benefit Bella Bamba", "Skinsheen Bronzer Stick",
                     "Tropiques Minerale Loose Bronzer",
-                    "Absolue Eye Precious Cells",
-                    "Flash Bronzer Body Gel", "ck one Summer 3.4 oz",
+                    "Absolue Eye Precious Cells", "Total Moisture Facial Cream",
+                    "Flash Bronzer Body Gel", "Absolue Eye Precious Cells",
                     "Absolute Anti-Age Spot Replenishing Unifying TreatmentSPF 15",
-                    "BeneFit Girl Meets Pearl",
-                    "Acqua Di Gio Pour Homme"
+                    "BeneFit Girl Meets Pearl", "Acqua Di Gio Pour Homme"
                 };
         }
     }
