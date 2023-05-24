@@ -21,11 +21,28 @@ namespace AutomationFramework.Tests
             string actualMsg = Pages.IndexPage.GetWelcomeMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
         }
-        [TearDown]
-        public void TearDown()
+
+
+        [Test]
+        public void LoginWithWrongData()
         {
-            // Logout korisnika
-            Pages.AccountLogoutPage.LogoutCustomer();
+            // Navigiranje na stranicu za login
+            Pages.IndexPage.ClickOnLoginOrRegister();
+            // Loginovanje sa staticnim kredencijalima
+            Pages.AccountPage.LoginUser(
+                TestData.User.Login.wrongusername,
+                TestData.User.Login.wrongpassword);
+
+            // Asertacija = provera postojanja poruke za uspesno logovanje
+            string expectedMsg = Constants.Messages.Error.incorrectlogin;
+            string actualMsg = Pages.AccountPage.GetErrorLoginMessage(); 
+            Assert.AreEqual(expectedMsg, actualMsg);
         }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    // Logout korisnika
+        //    Pages.AccountLogoutPage.LogoutCustomer();
+        //}
     }
 }

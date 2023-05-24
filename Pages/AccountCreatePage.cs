@@ -47,6 +47,7 @@ namespace AutomationFramework.Pages
         readonly By privacyPolicyBy = By.Id("AccountFrm_agree");
         readonly By continueButtonBy = By.XPath("//button[@title='Continue']");
         readonly By registationSuccessBy = By.XPath("//span[@class='maintext']");
+        readonly By registrationFailedBy = By.XPath("//div[contains(@class,'alert alert-error alert-danger')]");
 
         /// <summary>
         /// Metoda koja upisuje ime u odgovarajuce input polje
@@ -228,6 +229,15 @@ namespace AutomationFramework.Pages
         public string GetSuccessMessage()
         {
             return ReadText(registationSuccessBy).Trim().ToLower();
+        }
+
+        /// <summary>
+        /// Metoda koja vraca poruku o neuspesnoj registraciji korisnika
+        /// </summary>
+        /// <returns>Vraca poruku o neuspesnoj registraciji</returns>
+        public string GetErrorMessage()
+        {
+            return ReadText(registrationFailedBy);
         }
     }
 }
