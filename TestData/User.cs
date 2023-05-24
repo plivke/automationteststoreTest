@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 
 namespace AutomationFramework.TestData
 {
@@ -19,7 +18,6 @@ namespace AutomationFramework.TestData
                 telephone = "00381631072590",
                 loginName = "simonito",
                 password = "simonito"; //simonito53155
-
             public const bool
                 subscribed = true,
                 notSubscribed = false;

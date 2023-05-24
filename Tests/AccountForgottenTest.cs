@@ -62,5 +62,15 @@ namespace AutomationFramework.Tests
             string actualMsg = Pages.AccountForgottenPage.GetSuccessMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
         }
+
+        [TearDown]
+        public void TeraDown()
+        {
+            // U teardown-u se dodeljuje nova vrednost email-u i username-u kako be bi doslo
+            // do greske prilikom registracije sa istim kredencijalima
+            _email = CommonMethods.GenerateRandomUsername(_firstName) +
+                CommonMethods.GetRandomItemFromList((TestData.User.Registration.emailSufix).ToList());
+            _loginName = CommonMethods.GenerateRandomUsername(_lastName);
+        }
     }
 }
