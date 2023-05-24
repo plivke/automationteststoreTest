@@ -11,7 +11,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public ProductPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -20,14 +20,14 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public ProductPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By addToCartButtonBy = By.PartialLinkText("Add to Cart");
-        By productNameBy = By.XPath("//span[@class='bgnone']");
-        By AddToWishlistBy = By.XPath("//a[contains(@class, 'wishlist_add btn btn-large')]");
-        By removeFromWishlishBy = By.XPath("//a[contains(@class, 'wishlist_remove btn btn-large')]");
+        readonly By addToCartButtonBy = By.PartialLinkText("Add to Cart");
+        readonly By productNameBy = By.XPath("//span[@class='bgnone']");
+        readonly By addToWishlistBy = By.XPath("//a[contains(@class, 'wishlist_add btn btn-large')]");
+        readonly By removeFromWishlishBy = By.XPath("//a[contains(@class, 'wishlist_remove btn btn-large')]");
 
         /// <summary>
         /// Metoda koja klikne na Add to Cart dugme
@@ -35,30 +35,41 @@ namespace AutomationFramework.Pages
         public void ClickOnAddToCart() { ClickElement(addToCartButtonBy); }
 
         /// <summary>
-        /// Metoda koja vraca ime proizvoda
+        /// Metoda koja vraca ime prvog proizvoda u korpi
         /// </summary>
-        /// <returns>Vraca ime proizvoda</returns>
+        /// <returns>ime proizvoda</returns>
         public string GetProductName()
         {
-            Thread.Sleep(200);
-            return CommonMethods.ReadTextFromElement(
-                driver, productNameBy).Trim().ToLower();
+            return ReadText(productNameBy);
         }
 
         /// <summary>
-        /// Metoda koja klikne na add to wishlist dugme
+        /// Metoda koja klikne na add to wishlist dugme.
+        /// Ako izabrani proizvod je vec u Wishlist-i, metoda izbacuje 
+        /// proizvod iz Wishlist-e kako bi se opet ubacio
         /// </summary>
-        public void AddToWishlist()
+        public void ClickOnAddToWishlist()
         {
-            ClickElement(AddToWishlistBy);
+            if (!CommonMethods.IsElementPresented(_driver, addToWishlistBy))
+            {
+                ClickElement(removeFromWishlishBy);
+            }
+            Thread.Sleep(500);
+            ClickElement(addToWishlistBy);
         }
 
         /// <summary>
-        /// Metoda koja klikne na remove from wishlist dugme
+        /// Metoda koja klikne na remove from wishlist dugme.
+        /// Ako izabrani proizvod nije u Wishlist-i, metoda ubacuje 
+        /// proizvod u Wishlist-u kako be se opet izbacio
         /// </summary>
-        public void RemoveFromWishlist()
+        public void ClickOnRemoveFromWishlist()
         {
-            Thread.Sleep(1000);
+            if (!CommonMethods.IsElementPresented(_driver, removeFromWishlishBy))
+            {
+                ClickElement(addToWishlistBy);
+            }
+            Thread.Sleep(500);
             ClickElement(removeFromWishlishBy);
         }
     }

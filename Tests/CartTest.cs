@@ -7,13 +7,13 @@ namespace AutomationFramework.Tests
         [Test]
         public void CartCountValidation()
         {
-            int beforeAddToCart = Pages.IndexPage.CartBadgeCount();
+            byte beforeAddToCart = Pages.IndexPage.CartBadgeCount();
 
             Pages.IndexPage.AddProductFromIndex("50");
             Pages.IndexPage.AddProductFromIndex("50");
             Pages.IndexPage.AddProductFromIndex("66");
 
-            int afterAddToCart = Pages.IndexPage.CartBadgeCount();
+            byte afterAddToCart = Pages.IndexPage.CartBadgeCount();
             // Asertacija
             Assert.AreEqual(beforeAddToCart + 3, afterAddToCart);
         }

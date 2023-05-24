@@ -1,6 +1,4 @@
-﻿using AutomationFramework.Utils;
-using OpenQA.Selenium;
-using System.Threading;
+﻿using OpenQA.Selenium;
 
 namespace AutomationFramework.Pages
 {
@@ -11,7 +9,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public ContactUsPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -20,32 +18,32 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public ContactUsPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By firstNameBy = By.Id("ContactUsFrm_first_name");
-        By emailBy = By.Id("ContactUsFrm_email");
-        By enquiryBy = By.Id("ContactUsFrm_enquiry");
-        By submitButtonBy = By.XPath("//button[@title='Submit']");
-        By successfullyBy = By.XPath("//section[@class='mb40']/p[2]");
+        readonly By firstNameBy = By.Id("ContactUsFrm_first_name");
+        readonly By emailBy = By.Id("ContactUsFrm_email");
+        readonly By enquiryBy = By.Id("ContactUsFrm_enquiry");
+        readonly By submitButtonBy = By.XPath("//button[@title='Submit']");
+        readonly By successfullyBy = By.XPath("//section[@class='mb40']/p[2]");
 
         /// <summary>
         /// Metoda koja upisuje ime u odredjeno input polje
         /// </summary>
-        /// <param name="firstName">First name</param>
+        /// <param name="firstName">Ime</param>
         private void EnterFirtName(string firstName) { WriteText(firstNameBy, firstName); }
 
         /// <summary>
-        /// Metoda koja upisuje email u odredjeno input polje
+        /// Metoda koja upisuje _email u odredjeno input polje
         /// </summary>
-        /// <param name="email">Contact email</param>
+        /// <param name="email">Kontakt email</param>
         private void EnterEmail(string email) { WriteText(emailBy, email); }
 
         /// <summary>
         /// Metoda koja upisuje pitanje u odredjeno input polje
         /// </summary>
-        /// <param name="enquiry">Users enquiry</param>
+        /// <param name="enquiry">Pitanje ili upit korisnika</param>
         private void EnterEnquiry(string enquiry) { WriteText(enquiryBy, enquiry); }
 
         /// <summary>
@@ -54,8 +52,11 @@ namespace AutomationFramework.Pages
         private void ClickOnSubmit() { ClickElement(submitButtonBy); }
 
         /// <summary>
-        /// Metoda koja popunjava i salje Contact Us formu
+        /// Metoda koja popunjava i salje Contact Us formu klikom na Submit dugme
         /// </summary>
+        /// <param name="firstName">Ime</param>
+        /// <param name="email">Kontakt email</param>
+        /// <param name="enquiry">Pitanje ili upit korisnika</param>
         public void FilloutContactUsForm(
             string firstName,
             string email,
@@ -68,13 +69,13 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja cita tekst za uspesno poslat enquiry
+        /// Metoda koja vraca poruku o uspesno popunjenoj Contact Us formi.
+        /// Kopija poruke je trim-ovana i lowercase-ovana
         /// </summary>
+        /// <returns>poruku o uspesno poslatoj formi</returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(
-                driver, successfullyBy).Trim().ToLower();
+            return ReadText(successfullyBy).Trim().ToLower();
         }
     }
 }

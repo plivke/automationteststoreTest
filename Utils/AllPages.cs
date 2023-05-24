@@ -11,13 +11,13 @@ namespace AutomationFramework.Utils
     {
         public AllPages(Browsers browser)
         {
-            _browser = browser;
+            Browser = browser;
         }
-        Browsers _browser { get; }
+        Browsers Browser { get; }
         private T GetPages<T>() where T : new()
         {
-            var page = (T)Activator.CreateInstance(typeof(T), _browser.GetDriver);
-            PageFactory.InitElements(_browser.GetDriver, page);
+            var page = (T)Activator.CreateInstance(typeof(T), Browser.GetDriver);
+            PageFactory.InitElements(Browser.GetDriver, page);
             return page;
         }
         public IndexPage IndexPage => GetPages<IndexPage>();

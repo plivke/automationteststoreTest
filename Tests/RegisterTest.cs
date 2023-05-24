@@ -1,37 +1,38 @@
 ﻿using AutomationFramework.Utils;
 using NUnit.Framework;
+using System.Linq;
 
 namespace AutomationFramework.Tests
 {
     public class RegisterTest : BaseTest
     {
-        // generacija jedinstvenih polja
-        private static string firstName = TestData.TestData.RegisterUser.firstName;
-        private static string loginName = CommonMethods.GenerateRandomUsername(firstName);
-        private static string email = loginName + CommonMethods.GetRandomItemFromList(
-            TestData.TestData.RegisterUser.emailSufix);
+        // Generacija slucajnih korisnickih polja
+        static readonly string _firstName = TestData.User.Registration.firstName;
+        static readonly string _loginName = CommonMethods.GenerateRandomUsername(_firstName);
+        static readonly string _email = _loginName + CommonMethods.GetRandomItemFromList(
+        TestData.User.Registration.emailSufix.ToList<string>());
 
         [Test]
         public void Register()
         {
-            // Registracija korisnika NEOPHODNIH podacima za registraciju
+            // Registracija korisnika NEOPHODNIM podacima za registraciju
             Pages.IndexPage.ClickOnLoginOrRegister();
             Pages.AccountPage.ClickOnContinue();
             Pages.AccountCreatePage.RegisterWithRequiredOnly(
-                firstName,
-                TestData.TestData.RegisterUser.lastName,
-                email,
-                TestData.TestData.RegisterUser.address,
-                TestData.TestData.RegisterUser.city,
-                TestData.TestData.RegisterUser.zipCode,
-                loginName,
-                TestData.TestData.RegisterUser.password,
-                TestData.TestData.RegisterUser.notSubscribed);
+                _firstName,
+                TestData.User.Registration.lastName,
+                _email,
+                TestData.User.Registration.address,
+                TestData.User.Registration.city,
+                TestData.User.Registration.zipCode,
+                _loginName,
+                TestData.User.Registration.password,
+                TestData.User.Registration.notSubscribed);
 
-            // Asertacija - provera da li je poruka za uspesnu registraciju prisutna
-            Assert.AreEqual(
-                Constants.Messages.Success.registration,
-                Pages.AccountCreatePage.GetSuccessMessage());
+            // Asertacija - provera postojanja poruke za uspesnu registraciju
+            string expectedMsg = Constants.Messages.Success.registration.Trim().ToLower();
+            string actualMsg = Pages.AccountCreatePage.GetSuccessMessage();
+            Assert.AreEqual(expectedMsg, actualMsg);
         }
     }
 }

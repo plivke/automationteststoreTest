@@ -1,5 +1,4 @@
-﻿using AutomationFramework.Utils;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
@@ -13,7 +12,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public AccountCreatePage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -22,43 +21,43 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public AccountCreatePage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By firstNameBy = By.Id("AccountFrm_firstname");
-        By lastNameBy = By.Id("AccountFrm_lastname");
-        By emailBy = By.Id("AccountFrm_email");
-        By telephoneBy = By.Id("AccountFrm_telephone");
-        By faxBy = By.Id("AccountFrm_fax");
-        By companyBy = By.Id("AccountFrm_company");
-        By address1By = By.Id("AccountFrm_address_1");
-        By address2By = By.Id("AccountFrm_address_2");
-        By cityBy = By.Id("AccountFrm_city");
-        By regionStateBy = By.Id("AccountFrm_zone_id");
-        By regionStateOptionsBy = By.XPath("//select[@id='AccountFrm_zone_id']/option");
-        By zipCodeBy = By.Id("AccountFrm_postcode");
-        By countryBy = By.Id("AccountFrm_country_id");
-        By countryOptionsBy = By.XPath("select[@id='AccountFrm_country_id']/option");
-        By loginNameBy = By.Id("AccountFrm_loginname");
-        By passwordBy = By.Id("AccountFrm_password");
-        By passwordConfirmBy = By.Id("AccountFrm_confirm");
-        By newsletterYesBy = By.Id("AccountFrm_newsletter1");
-        By newsletterNoBy = By.Id("AccountFrm_newsletter0");
-        By privacyPolicyBy = By.Id("AccountFrm_agree");
-        By continueButtonBy = By.XPath("//button[@title='Continue']");
-        By registationSuccessBy = By.XPath("//span[@class='maintext']");
+        readonly By firstNameBy = By.Id("AccountFrm_firstname");
+        readonly By lastNameBy = By.Id("AccountFrm_lastname");
+        readonly By emailBy = By.Id("AccountFrm_email");
+        readonly By telephoneBy = By.Id("AccountFrm_telephone");
+        readonly By faxBy = By.Id("AccountFrm_fax");
+        readonly By companyBy = By.Id("AccountFrm_company");
+        readonly By address1By = By.Id("AccountFrm_address_1");
+        readonly By address2By = By.Id("AccountFrm_address_2");
+        readonly By cityBy = By.Id("AccountFrm_city");
+        readonly By regionStateBy = By.Id("AccountFrm_zone_id");
+        readonly By regionStateOptionsBy = By.XPath("//select[@id='AccountFrm_zone_id']/option");
+        readonly By zipCodeBy = By.Id("AccountFrm_postcode");
+        readonly By countryBy = By.Id("AccountFrm_country_id");
+        readonly By countryOptionsBy = By.XPath("select[@id='AccountFrm_country_id']/option");
+        readonly By loginNameBy = By.Id("AccountFrm_loginname");
+        readonly By passwordBy = By.Id("AccountFrm_password");
+        readonly By passwordConfirmBy = By.Id("AccountFrm_confirm");
+        readonly By newsletterYesBy = By.Id("AccountFrm_newsletter1");
+        readonly By newsletterNoBy = By.Id("AccountFrm_newsletter0");
+        readonly By privacyPolicyBy = By.Id("AccountFrm_agree");
+        readonly By continueButtonBy = By.XPath("//button[@title='Continue']");
+        readonly By registationSuccessBy = By.XPath("//span[@class='maintext']");
 
         /// <summary>
         /// Metoda koja upisuje ime u odgovarajuce input polje
         /// </summary>
-        /// <param name="firstName">First name</param>
+        /// <param name="firstName">Ime</param>
         private void EnterFirstName(string firstName) { WriteText(firstNameBy, firstName); }
 
         /// <summary>
         /// Metoda koja upisuje prezime u odgovarajuce input polje
         /// </summary>
-        /// <param name="lastName">Last name</param>
+        /// <param name="lastName">Prezime</param>
         private void EnterLastName(string lastName) { WriteText(lastNameBy, lastName); }
 
         /// <summary>
@@ -70,84 +69,104 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja upisuje broj telefona u odgovarajuce input polje
         /// </summary>
-        /// <param name="telephone">Telephone number</param>
+        /// <param name="telephone">Broj telefona</param>
         private void EnterTelephone(string telephone) { WriteText(telephoneBy, telephone); }
 
         /// <summary>
         /// Metoda koja upisuje faks u odgovarajuce input polje
         /// </summary>
-        /// <param name="fax">Fax number</param>
+        /// <param name="fax">Broj faksa</param>
         private void EnterFax(string fax) { WriteText(faxBy, fax); }
 
         /// <summary>
         /// Metoda koja upisuje kompaniju u odgovarajuce input polje
         /// </summary>
-        /// <param name="company">Company name</param>
+        /// <param name="company">Ime preduzeca</param>
         private void EnterCompany(string company) { WriteText(companyBy, company); }
 
+
         /// <summary>
-        /// Metoda koja selektuje nasumicno drzavu
+        /// Metoda koja nasumicno selektuje drzavu
         /// </summary>
-        private void SelectCountry(string country = "Yugoslavia")
+        private void SelectCountry()
         {
-            if (!String.IsNullOrEmpty(country.ToLower()))
+            SelectRandomElement(countryBy);
+            Thread.Sleep(1000);
+        }
+
+        /// <summary>
+        /// Metoda koja selektuje drzavu
+        /// </summary>
+        /// <param name="countryName">Ime drzave</param>
+        private void SelectCountry(string countryName)
+        {
+            if (!String.IsNullOrEmpty(countryName.ToLower()))
             {
-                SelectElement select = new SelectElement(driver.FindElement(countryBy));
-                select.SelectByText(country);
-                Thread.Sleep(1000);
+                SelectElement select = new(_driver.FindElement(countryBy));
+                select.SelectByText(countryName);
             }
         }
 
         /// <summary>
-        /// Metoda koja selektuje nasumicno region
+        /// Metoda koja nasumicno selektuje regiju
         /// </summary>
-        private void SelectRegionState(string region = "Vojvodina")
+        private void SelectRegionState()
         {
-            if (!String.IsNullOrEmpty(region.ToLower()))
-            {
-                SelectElement select = new SelectElement(driver.FindElement(regionStateBy));
-                select.SelectByText(region);
-            }
+            Thread.Sleep(1000);
+            SelectRandomElement(regionStateBy);
         }
 
         /// <summary>
-        /// Metoda koja upisuje grad u odgovarajuce input polje
+        /// Metoda koja selektuje regiju
         /// </summary>
-        /// <param name="city">City name</param>
+        /// <param name="regionName">Ime regije</param>
+        private void SelectRegionState(string regionName)
+        {
+            if (!String.IsNullOrEmpty(regionName.ToLower()))
+            {
+                SelectElement select = new(_driver.FindElement(regionStateBy));
+                select.SelectByText(regionName);
+            }
+        }
+
+
+        /// <summary>
+        /// Metoda koja upisuje City u odgovarajuce input polje
+        /// </summary>
+        /// <param name="city">Ime grada</param>
         private void EnterCity(string city) { WriteText(cityBy, city); }
 
         /// <summary>
         /// Metoda koja upisuje adresu u odgovarajuce input polje
         /// </summary>
-        /// <param name="address1">First address</param>
+        /// <param name="address1">Primarna adresa</param>
         private void EnterAddress1(string address1) { WriteText(address1By, address1); }
 
         /// <summary>
         /// Metoda koja upisuje drugu adresu u odgovarajuce input polje
         /// </summary>
-        /// <param name="address2">Second address</param>
+        /// <param name="address2">Sekundarna adresa</param>
         private void EnterAddress2(string address2) { WriteText(address2By, address2); }
 
         /// <summary>
-        /// Metoda koja upisuje postanski kod u odgovarajuce input polje
+        /// Metoda koja upisuje Postal code u odgovarajuce input polje
         /// </summary>
-        /// <param name="zipCode">Postal code</param>
+        /// <param name="zipCode">Postanski broj</param>
         private void EnterZipCode(string zipCode) { WriteText(zipCodeBy, zipCode); }
 
         /// <summary>
-        /// Metoda koja upisuje username u odgovarajuce input polje
+        /// Metoda koja upisuje Loginname u odgovarajuce input polje
         /// </summary>
-        /// <param name="loginName">Users login name</param>
+        /// <param name="loginName">Korisnicko login ime</param>
         private void EnterLoginName(string loginName) { WriteText(loginNameBy, loginName); }
 
         /// <summary>
-        /// Metoda koja upisuje password u odgovarajuca input polja
+        /// Metoda koja upisuje Password u odgovarajuca input polja
         /// </summary>
-        /// <param name="password">Users password</param>
+        /// <param name="password">Korisnicka sifra</param>
         private void EnterConfirmPassword(string password)
         {
             WriteText(passwordBy, password);
-            Thread.Sleep(500);
             WriteText(passwordConfirmBy, password);
         }
 
@@ -162,17 +181,18 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja stiklira checkbox za Privacy Policy
+        /// Metoda koja check-ira checkbox za Privacy Policy
         /// </summary>
         private void ClickAgreeOnPolicy() { ClickElement(privacyPolicyBy); }
 
         /// <summary>
         /// Metoda koja klikne na Continue dugme
         /// </summary>
-        private void ClickOnContinue() { ClickElement(continueButtonBy); }
+        private void ClickOnContinue() { Thread.Sleep(500); ClickElement(continueButtonBy); }
 
         /// <summary>
-        /// Metoda koja registruje korisnika sa samo neophodnim podacima
+        /// Metoda koja registruje korisnika tako sto popunjava sva neophodna
+        /// polja forme i prosledjuje je klikom na Continue dugme
         /// </summary>
         public void RegisterWithRequiredOnly(
             string firstName,
@@ -201,13 +221,13 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja vraca poruku o uspehu
+        /// Metoda koja vraca poruku o uspehu registracije korisnika.
+        /// Kopija poruke je trim-ovana i lowercase-ovana
         /// </summary>
-        /// <returns>Vraca poruku o uspehu</returns>
+        /// <returns>vraca poruku o uspehu</returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(driver, registationSuccessBy).Trim().ToLower();
+            return ReadText(registationSuccessBy).Trim().ToLower();
         }
     }
 }

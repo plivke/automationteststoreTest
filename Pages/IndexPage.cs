@@ -11,7 +11,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public IndexPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -20,21 +20,20 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public IndexPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By loginOrRegisterLinkBy = By.LinkText("Login or register");
-        By accountLinkBy = By.LinkText("Account");
-        By welcomeMessageBy = By.XPath("//div[@class='menu_text']");
-        By homePageLinkBy = By.LinkText("Home");
-        By contactUsLinkBy = By.LinkText("Contact Us");
-        By searchBoxBy = By.Id("filter_keyword");
-        By searchButtonBy = By.XPath("//div[@class='button-in-search']");
-        By cartBy = By.XPath("//ul[@id='main_menu_top']/li[@data-id='menu_cart']/a");
-        By cartBadgeBy = By.XPath("//a[@class='dropdown-toggle']/span[contains(@class,'label-orange font14')]");
-        By cartTotalBy = By.XPath("//a[@class='dropdown-toggle']/span[contains(@class,'cart_total')]");
-        By itemPriceBy = By.XPath("(//div[@class='pricetag jumbotron']/a[@data-id='50']/..//div[@class='oneprice'])[1]");
+        readonly By loginOrRegisterLinkBy = By.LinkText("Login or register");
+        readonly By accountLinkBy = By.LinkText("Account");
+        readonly By welcomeMessageBy = By.XPath("//div[@class='menu_text']");
+        readonly By homePageLinkBy = By.LinkText("Home");
+        readonly By contactUsLinkBy = By.LinkText("Contact Us");
+        readonly By searchBoxBy = By.Id("filter_keyword");
+        readonly By searchButtonBy = By.XPath("//div[@class='button-in-search']");
+        readonly By cartBy = By.XPath("//ul[@id='main_menu_top']/li[@data-id='menu_cart']/a");
+        readonly By cartBadgeBy = By.XPath("//a[@class='dropdown-toggle']/span[contains(@class,'label-orange font14')]");
+        readonly By cartTotalBy = By.XPath("//a[@class='dropdown-toggle']/span[contains(@class,'cart_total')]");
 
         /// <summary>
         /// Metoda koja klikne na Login or register link
@@ -67,19 +66,19 @@ namespace AutomationFramework.Pages
 
 
         /// <summary>
-        /// Metoda koja dodaje proizvode u korpu sa indeks strane
+        /// Metoda koja dodaje proizvod u korpu sa Index stranice
         /// na osnovu njihovog id-a
         /// </summary>
         /// <param name="itemId">Id proizvoda</param>
         public void AddProductFromIndex(string itemId = "50")
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             ClickElement(By.XPath($"//a[@data-id='{itemId}']"));
         }
 
         /// <summary>
-        /// Metoda koja dodaje proizvode u korpu sa indeks strane
-        /// na osnovu njihovih imena
+        /// Metoda koja klikne na proizvod sa Index stranice i ulazi na 
+        /// Product stranicu na osnovu imena proizvoda
         /// </summary>
         /// <param name="itemName">Ime proizvoda</param>
         public void ClickOnProduct(string itemName = "ck one Summer 3.4 oz")
@@ -93,47 +92,51 @@ namespace AutomationFramework.Pages
         /// <param name="itemName">Ime proizvoda</param>
         public void SearchProduct(string itemName = "New French With Ease")
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             WriteText(searchBoxBy, itemName);
             ClickElement(searchButtonBy);
         }
 
         /// <summary>
-        /// Metoda koja kraca broj proizvoda u korpi
+        /// Metoda koja vraca broj proizvoda u korpi
         /// </summary>
-        /// <returns>Broj proizvoda u korpi</returns>
-        public int CartBadgeCount()
+        /// <returns>broj proizvoda u korpi</returns>
+        public byte CartBadgeCount()
         {
-            Thread.Sleep(200);
-            string s = CommonMethods.ReadTextFromElement(driver, cartBadgeBy);
-            return int.Parse(s);
+            //Thread.Sleep(200);
+            string countString = ReadText(cartBadgeBy);
+            if (byte.TryParse(countString, out byte count))
+            {
+                return count;
+            }
+            return 0;
         }
 
         /// <summary>
-        /// Metoda koja vraca ukupnu vrednost korpe
+        /// Metoda koja vraca ukupnu sumu korpe
         /// </summary>
-        /// <returns>Decimalnu vrednost korpe</returns>
+        /// <returns>decimalan tip ukupne sumu korpe</returns>
         public decimal GetCartTotal()
         {
-            return CommonMethods.PriceTextToDecimal(driver, cartTotalBy);
+            return CommonMethods.PriceTextToDecimal(_driver, cartTotalBy);
         }
 
         /// <summary>
         /// Metoda koja konvertuje string cene proizvoda u decimalni tip
         /// </summary>
-        /// <param name="itemId">Proizvod Id</param>
-        /// <returns>Decimalnu vrednost proizvoda</returns>
+        /// <param name="itemId">Id proizvoda</param>
+        /// <returns>decimalni tip cene proizvoda</returns>
         private decimal GetProductPrice(string itemId)
         {
             return CommonMethods.PriceTextToDecimal(
-                driver, By.XPath($"(//div[contains(@class, 'pricetag jumbotron')]/a[@data-id={itemId}]/..//div[@class='oneprice'])[1]"));
+                _driver, By.XPath($"(//div[contains(@class, 'pricetag jumbotron')]/a[@data-id={itemId}]/..//div[@class='oneprice'])[1]"));
         }
 
         /// <summary>
-        /// Metoda koja vraca ukupnu sumu proizvoda
-        /// </summary>
-        /// <param name="itemId">Tekst cene</param>
-        /// <returns>Vraca decimalnu sumu</returns>
+        /// Metoda koja dodaje proizvod u korpu i vraca
+        /// cenu dodatog proizvoda
+        /// </summaryId proizvoda</param>
+        /// <returns>decimalni tip cene proizvoda</returns>
         public decimal AddToTotal(string itemId)
         {
             AddProductFromIndex(itemId);
@@ -141,13 +144,13 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja cita tekst iz 'welcome user' poruke
+        /// Metoda koja cita tekst iz 'Welcome user' poruke
+        /// Kopija poruke je trim-ovana i lowercase-ovana
         /// </summary>
-        /// <returns>Welcome user poruka</returns>
+        /// <returns>welcome user poruka</returns>
         public string GetWelcomeMessage()
         {
-            Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(driver, welcomeMessageBy).ToLower();
+            return ReadText(welcomeMessageBy).Trim().ToLower();
         }
     }
 }

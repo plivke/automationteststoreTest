@@ -11,7 +11,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public CartPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -20,23 +20,23 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public CartPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By totalsTableBy = By.XPath("//table[@id='totals_table']");
-        By removeButtonBy = By.XPath("//i[contains(@class, 'fa-trash')]/..");
-        By continueButtonBy = By.XPath("//a[@title='Continue']");
-        By checkoutButtonBy = By.Id("cart_checkout1");
+        readonly By totalsTableBy = By.XPath("//table[@id='totals_table']");
+        readonly By removeButtonBy = By.XPath("//i[contains(@class, 'fa-trash')]/..");
+        readonly By continueButtonBy = By.XPath("//a[@title='Continue']");
+        readonly By checkoutButtonBy = By.Id("cart_checkout1");
 
         /// <summary>
         /// Metoda koja proverava postojanje proizvoda u korpi
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true = korpa nije prazna || false = korpa je prazna</returns>
         public bool IsCartNotEmpty()
         {
-            Thread.Sleep(1000);
-            return CommonMethods.IsElementPresented(driver, totalsTableBy);
+            Thread.Sleep(200);
+            return CommonMethods.IsElementPresented(_driver, totalsTableBy);
         }
 
         /// <summary>
@@ -45,7 +45,8 @@ namespace AutomationFramework.Pages
         private void ClickOnContinue() { ClickElement(continueButtonBy); }
 
         /// <summary>
-        /// Metoda koja izmesta sve proizvode iz korpe
+        /// Metoda koja izmesta sve proizvode iz korpe i izlazi iz nje
+        /// klikom na Continue dugme
         /// </summary>
         public void RemoveItemsFromCart()
         {

@@ -1,6 +1,5 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -11,7 +10,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public AccountLogoutPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -20,26 +19,22 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public AccountLogoutPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By logoutLinkBy = By.XPath("//ul[@class='info_links_footer']//a[contains(., 'Logoff')]");
-        By continueButtonBy = By.XPath("//a[@title='Continue']");
-        
+        readonly By logoutLinkBy = By.XPath("//ul[@class='info_links_footer']//a[contains(., 'Logoff')]");
+        readonly By continueButtonBy = By.XPath("//a[@title='Continue']");
+
 
         /// <summary>
-        /// Metoda koja odjavljuje korisnika i vraca ga na home page
+        /// Metoda koja vrsi odjavu korisnika i vracanje na index stranicu
         /// </summary>
         public void LogoutCustomer()
         {
-            Thread.Sleep(200);
-            if(CommonMethods.IsElementPresented(driver, logoutLinkBy))
-            {
+            if (CommonMethods.IsElementPresented(_driver, logoutLinkBy))
                 ClickElement(logoutLinkBy);
-                Thread.Sleep(1000);
-                ClickElement(continueButtonBy);
-            }
+            ClickElement(continueButtonBy);
         }
     }
 }

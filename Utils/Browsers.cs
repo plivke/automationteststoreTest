@@ -9,11 +9,11 @@ namespace AutomationFramework.Utils
     /// </summary>
     public class Browsers
     {
-        private IWebDriver webDriver;
-        private string baseURL = "https://automationteststore.com/";
+        private IWebDriver _webDriver;
+        private readonly string _baseURL = "https://automationteststore.com/";
 
         /// <summary>
-        /// Metoda koja pravi objekat odredjenog browsera, maximizira prozor i navigira na baseURL
+        /// Metoda koja pravi objekat odredjenog browsera, maximizira prozor i navigira na _baseURL
         /// </summary>
         public void Init()
         {
@@ -21,35 +21,35 @@ namespace AutomationFramework.Utils
 
             chromeOptions.AddArgument("ignore-certificate-errors");
             chromeOptions.AddArgument("start-maximized");
-            webDriver = new ChromeDriver(chromeOptions);
+            _webDriver = new ChromeDriver(chromeOptions);
 
-            Goto(baseURL);
+            Goto(_baseURL);
         }
 
         /// <summary>
-        /// Getter metoda za webDriver
+        /// Getter metoda za _webDriver
         /// </summary>
         public IWebDriver GetDriver
         {
-            get { return webDriver; }
+            get { return _webDriver; }
         }
 
         /// <summary>
-        /// Metoda koja navigira driver na odredjeni URL
+        /// Metoda koja navigira _driver na odredjeni URL
         /// </summary>
         /// <param name="url">URL</param>
         public void Goto(string url)
         {
-            //webDriver.Url = url;
-            webDriver.Navigate().GoToUrl(url);
+            //_webDriver.Url = url;
+            _webDriver.Navigate().GoToUrl(url);
         }
 
         /// <summary>
-        /// Metoda koja gasi driver
+        /// Metoda koja gasi _driver
         /// </summary>
         public void Close()
         {
-            webDriver.Quit();
+            _webDriver.Quit();
         }
     }
 }

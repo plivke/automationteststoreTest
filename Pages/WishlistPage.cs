@@ -11,47 +11,70 @@ namespace AutomationFramework.Pages
         /// </summary>
         public WishlistPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
         /// Parametarizovani konstruktor
         /// </summary>
-        /// <param name="webDriver">Driver</param>
+        /// <param name="webDriver">_driver</param>
         public WishlistPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By itemNameBy = By.XPath("//tr[2]/td[2]");
-        By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
+        readonly By itemNameBy = By.XPath("//tr[2]/td[2]/a");
+        readonly By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
+        readonly By wishlistEmptyBy = By.ClassName("contentpanel");
 
         /// <summary>
         /// Metoda koja vraca ime 
         /// </summary>
-        /// <returns>Vraca ime proizvoda iz wishlist-e</returns>
+        /// <returns>ime proizvoda iz Wishlist-e</returns>
         public string GetItemName()
         {
-            return CommonMethods.ReadTextFromElement(driver, itemNameBy);
+            return ReadText(itemNameBy);
         }
 
         /// <summary>
-        /// Metoda koja sklanja proizvod iz wishlist-e
+        /// Metoda koja uklanja prvi proizvod iz Wishlist-e
         /// </summary>
-        public void RemoveItem()
+        private void RemoveItemFromWishlist()
         {
-            Thread.Sleep(1000);
             ClickElement(removeButtonBy);
         }
 
         /// <summary>
-        /// Metoda koja proverava da li je wishlist-a prazna
+        /// Metoda koja uklanja sve proizvode iz Wishlist-e
         /// </summary>
-        /// <returns>Vraca da li je item u wishlist-i</returns>
+        public void RemoveAllItemsFromWishlist()
+        {
+            while (IsItemPresent())
+            {
+                RemoveItemFromWishlist();
+                Thread.Sleep(500);
+            }
+        }
+
+        /// <summary>
+        /// Metoda koja vraca poruku o praznoj Wishlist-i.
+        /// Kopija poruke je trim-ovana i lowercase-ovana
+        /// </summary>
+        /// <returns>vraca poruku o praznoj Wishlist-i</returns>
+        public string GetWishlistEmptyMessage()
+        {
+            Thread.Sleep(500);
+            return ReadText(wishlistEmptyBy).Trim().ToLower();
+        }
+
+        /// <summary>
+        /// Metoda koja proverava postoji li item u Wishlist-i
+        /// </summary>
+        /// <returns>vraca True ako je proizvod u Wishlist-i</returns>
         public bool IsItemPresent()
         {
-            return CommonMethods.IsElementPresented(driver, itemNameBy);
+            return CommonMethods.IsElementPresented(_driver, itemNameBy);
         }
     }
 }

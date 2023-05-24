@@ -11,7 +11,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public CheckoutPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -20,13 +20,13 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public CheckoutPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By currencyListBy = By.XPath("//div[@class='block_6']");
-        By checkoutButtonBy = By.Id("checkout_btn");
-        By orderProcessedMessageBy = By.XPath("//span[@class='maintext']");
+        readonly By currencyListBy = By.XPath("//div[@class='block_6']");
+        readonly By checkoutButtonBy = By.Id("checkout_btn");
+        readonly By orderProcessedMessageBy = By.XPath("//span[@class='maintext']");
 
         /// <summary>
         /// Metoda koja postavlja valutu
@@ -34,13 +34,12 @@ namespace AutomationFramework.Pages
         /// <param name="CUR">Curencies: EUR, USD or GBP</param>
         public void SetCurrency(string CUR)
         {
-            ClickElement(currencyListBy);
-            Thread.Sleep(100);
+            CommonMethods.HoverOnElement(_driver, currencyListBy);
             ClickElement(By.XPath($"//div[@class='block_6']//a[contains(@href, '{CUR}')]"));
         }
 
         /// <summary>
-        /// 
+        /// Metoda koja klikne na Confirm Order dugme
         /// </summary>
         private void ClickOnConfirmOrder() { ClickElement(checkoutButtonBy); }
 
@@ -51,19 +50,18 @@ namespace AutomationFramework.Pages
         public void PurchaseInCurency(string CUR)
         {
             SetCurrency(CUR);
-            Thread.Sleep(100);
             ClickOnConfirmOrder();
         }
 
         /// <summary>
-        /// 
+        /// Metoda koja vraca poruku o uspehu procesiranja porudzbine.
+        /// Kopija poruke je trim-ovana i lowercase-ovana
         /// </summary>
-        /// <returns></returns>
+        /// <returns>poruku o uspesnoj porudzbini</returns>
         public string GetSuccessMessage()
         {
             Thread.Sleep(500);
-            return CommonMethods.ReadTextFromElement(
-                driver, orderProcessedMessageBy).Trim().ToLower();
+            return ReadText(orderProcessedMessageBy).Trim().ToLower();
         }
     }
 }
