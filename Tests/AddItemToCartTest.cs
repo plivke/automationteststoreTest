@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using AutomationFramework.Utils;
+using NUnit.Framework;
+using System.Linq;
 
 namespace AutomationFramework.Tests
 {
@@ -38,8 +40,10 @@ namespace AutomationFramework.Tests
         [Test]
         public void AddFromProductPage()
         {
+            string itemName = CommonMethods.GetRandomItemFromList(
+                TestData.Cart.CartItem.itemName.ToList());
             //Klik na proizvod
-            Pages.IndexPage.ClickOnProduct();
+            Pages.IndexPage.ClickOnProduct(itemName);
 
             //Dodavanje proizvoda u korpu
             Pages.ProductPage.ClickOnAddToCart();
