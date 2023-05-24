@@ -9,7 +9,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         public AccountPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
@@ -18,18 +18,18 @@ namespace AutomationFramework.Pages
         /// <param name="webDriver">Driver</param>
         public AccountPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By continueButtonBy = By.XPath("//button[@title='Continue']");
-        By loginNameBy = By.Id("loginFrm_loginname");
-        By loginPasswordBy = By.Id("loginFrm_password");
-        By loginButtonBy = By.XPath("//button[@title='Login']");
-        By forgottenPasswordBy = By.PartialLinkText("Forgot your password?");
-        By forgottenLoginBy = By.PartialLinkText("Forgot your login?");
-        By guestCheckoutBy = By.Id("accountFrm_accountguest");
-        By wishlistLinkBy = By.XPath("//a[@data-original-title='My wish list']");
+        readonly By continueButtonBy = By.XPath("//button[@title='Continue']");
+        readonly By loginNameBy = By.Id("loginFrm_loginname");
+        readonly By loginPasswordBy = By.Id("loginFrm_password");
+        readonly By loginButtonBy = By.XPath("//button[@title='Login']");
+        readonly By forgottenPasswordBy = By.PartialLinkText("Forgot your password?");
+        readonly By forgottenLoginBy = By.PartialLinkText("Forgot your login?");
+        readonly By guestCheckoutBy = By.Id("accountFrm_accountguest");
+        readonly By wishlistLinkBy = By.XPath("//a[@data-original-title='My wish list']");
 
         /// <summary>
         /// Metoda koja klikne na Continue dugme za registraciju
@@ -44,20 +44,20 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja popunjava login name polje
         /// </summary>
-        /// <param name="name">Username</param>
+        /// <param name="name">Korisnicki username</param>
         private void EnterLoginName(string name) { WriteText(loginNameBy, name); }
 
         /// <summary>
         /// Metoda koja popunjava login password polje
         /// </summary>
-        /// <param name="password">User password</param>
+        /// <param name="password">Korisnicka sifra</param>
         private void EnterLoginPassword(string password) { WriteText(loginPasswordBy, password); }
 
         /// <summary>
-        /// Metoda koja popunjava Login formu i loguje user-a
+        /// Metoda koja popunjava Login formu i prijavljuje korisnika na nalog
         /// </summary>
-        /// <param name="username">Username</param>
-        /// <param name="password">User password</param>
+        /// <param name="username">Korisnicki username</param>
+        /// <param name="password">Korisnicka sifra</param>
         public void LoginUser(string username, string password)
         {
             EnterLoginName(username);
@@ -66,7 +66,7 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja vodi gosta na checkout
+        /// Metoda koja vodi gosta na Checkout
         /// </summary>
         public void GuestCheckout()
         {
@@ -83,12 +83,12 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        ///Metoda koja klikne na link za izgubljeni password
+        ///Metoda koja klikne na link za izgubljenu sifru
         /// </summary>
         public void ClickOnForgottenPassword() { ClickElement(forgottenPasswordBy); }
 
         /// <summary>
-        /// Metoda koja klikne na link za izgubljeni login
+        /// Metoda koja klikne na link za izgubljene kredencijale
         /// </summary>
         public void ClickOnForgottenLogin() { ClickElement(forgottenLoginBy); }
 

@@ -4,7 +4,7 @@ namespace AutomationFramework.Tests
 {
     public class LoginTest : BaseTest
     {
-        private static string _firstName = TestData.TestData.RegisterUser.firstName;
+        static readonly string _firstName = TestData.User.Login.firstName;
 
         [Test]
         public void Login()
@@ -13,8 +13,8 @@ namespace AutomationFramework.Tests
             Pages.IndexPage.ClickOnLoginOrRegister();
             // Loginovanje sa staticnim kredencijalima
             Pages.AccountPage.LoginUser(
-                TestData.TestData.Login.username,
-                TestData.TestData.Login.password);
+                TestData.User.Login.username,
+                TestData.User.Login.password);
 
             // Asertacija = provera postojanja poruke za uspesno logovanje
             string expectedMsg = (Constants.Messages.Success.welcomeBack + _firstName).Trim().ToLower();

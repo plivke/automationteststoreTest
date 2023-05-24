@@ -11,21 +11,22 @@ namespace AutomationFramework.Pages
         /// </summary>
         public WishlistPage()
         {
-            driver = null;
+            _driver = null;
         }
 
         /// <summary>
         /// Parametarizovani konstruktor
         /// </summary>
-        /// <param name="webDriver">driver</param>
+        /// <param name="webDriver">_driver</param>
         public WishlistPage(IWebDriver webDriver)
         {
-            driver = webDriver;
+            _driver = webDriver;
         }
 
         // Locators
-        By itemNameBy = By.XPath("//tr[2]/td[2]/a");
-        By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
+        readonly By itemNameBy = By.XPath("//tr[2]/td[2]/a");
+        readonly By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
+        readonly By wishlistEmptyBy = By.ClassName("contentpanel");
 
         /// <summary>
         /// Metoda koja vraca ime 
@@ -52,8 +53,19 @@ namespace AutomationFramework.Pages
             while (IsItemPresent())
             {
                 RemoveItemFromWishlist();
-                Thread.Sleep(200);
+                Thread.Sleep(500);
             }
+        }
+
+        /// <summary>
+        /// Metoda koja vraca poruku o praznoj Wishlist-i.
+        /// Kopija poruke je trim-ovana i lowercase-ovana
+        /// </summary>
+        /// <returns>vraca poruku o praznoj Wishlist-i</returns>
+        public string GetWishlistEmptyMessage()
+        {
+            Thread.Sleep(500);
+            return ReadText(wishlistEmptyBy).Trim().ToLower();
         }
 
         /// <summary>
@@ -62,7 +74,7 @@ namespace AutomationFramework.Pages
         /// <returns>vraca True ako je proizvod u Wishlist-i</returns>
         public bool IsItemPresent()
         {
-            return CommonMethods.IsElementPresented(driver, itemNameBy);
+            return CommonMethods.IsElementPresented(_driver, itemNameBy);
         }
     }
 }

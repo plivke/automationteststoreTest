@@ -12,5 +12,13 @@
                 enquirySent = "Your enquiry has been successfully sent to the store owner!",
                 orderProcessed = " Your Order Has Been Processed!";
         }
+
+        public static class ListEmpty
+        {
+            public const string
+                cart = "\r\n\r\n\tYour shopping cart is empty!\t\r\n\t",
+                wishlist = "\r\n\r\n\tWish list is empty\t\r\n\t";
+
+        }
     }
 }

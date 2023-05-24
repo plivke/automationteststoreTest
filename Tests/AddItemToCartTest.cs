@@ -10,11 +10,10 @@ namespace AutomationFramework.Tests
             Pages.IndexPage.ClickOnLoginOrRegister();
 
             Pages.AccountPage.LoginUser(
-                TestData.TestData.Login.username,
-                TestData.TestData.Login.password);
+                TestData.User.Login.username,
+                TestData.User.Login.password);
             Pages.IndexPage.ClickOnCartPageLink();
             Pages.CartPage.RemoveItemsFromCart();
-
         }
 
         [Test]

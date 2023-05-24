@@ -10,8 +10,8 @@ namespace AutomationFramework.Tests
             Pages.IndexPage.ClickOnLoginOrRegister();
 
             Pages.AccountPage.LoginUser(
-                TestData.TestData.Login.username,
-                TestData.TestData.Login.password);
+                TestData.User.Login.username,
+                TestData.User.Login.password);
             Pages.IndexPage.ClickOnHomePageLink();
             Pages.IndexPage.AddProductFromIndex();
         }
@@ -19,11 +19,11 @@ namespace AutomationFramework.Tests
         [Test]
         public void RemoveItemFromCart()
         {
-            // Klikcemo na link za dodavanje u korpu
+            // Kliknemo na link za odlazak u korpu
             Pages.IndexPage.ClickOnCartPageLink();
             bool isCartEmptyBefore = !Pages.CartPage.IsCartNotEmpty();
 
-            // Klikcemo na link za sklanjanje iz korpe
+            // Kliknemo na link za sklanjanje iz korpe
             Pages.CartPage.RemoveItemsFromCart();
             bool isCartEmptyAfter = !Pages.CartPage.IsCartNotEmpty();
 

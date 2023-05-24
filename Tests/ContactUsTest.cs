@@ -9,9 +9,9 @@ namespace AutomationFramework.Tests
         {
             Pages.IndexPage.ClickOnContactUs();
             Pages.ContactUsPage.FilloutContactUsForm(
-                TestData.TestData.ContactUs.firstName,
-                TestData.TestData.ContactUs.email,
-                TestData.TestData.ContactUs.enquiry);
+                TestData.ContactUs.Form.firstName,
+                TestData.ContactUs.Form.email,
+                TestData.ContactUs.Form.enquiry);
             // Asertacija
             string expectedMsg = Constants.Messages.Success.enquirySent.Trim().ToLower();
             string actualMsg = Pages.ContactUsPage.GetSuccessMessage();
