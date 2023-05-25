@@ -33,5 +33,6 @@ namespace AutomationFramework.Utils
         public WishlistPage WishlistPage => GetPages<WishlistPage>();
         public ChangePasswordPage ChangePasswordPage => GetPages<ChangePasswordPage>();
         public AccountEditPage AccountEditPage => GetPages<AccountEditPage>();
+        public ShippingAddressesPage ShippingAddressesPage => GetPages<ShippingAddressesPage>();
     }
 }
