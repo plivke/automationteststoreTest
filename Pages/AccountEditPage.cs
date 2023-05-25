@@ -22,39 +22,9 @@ namespace AutomationFramework.Pages
         }
 
         // Locators
-        //readonly By firstNameBy = By.Id("AccountFrm_firstname");
-        //readonly By lastNameBy = By.Id("AccountFrm_lastname");
-        //readonly By emailBy = By.Id("AccountFrm_email");
         readonly By telephoneBy = By.Id("AccountFrm_telephone");
         readonly By faxBy = By.Id("AccountFrm_fax");
         readonly By continueButtonBy = By.XPath("//button[@title='Continue']");
-
-        ///// <summary>
-        ///// Metoda koja menja ime korisnika
-        ///// </summary>
-        ///// <param name="firstName">Ime</param>
-        //private void EnterFirstName(string firstName)
-        //{
-        //    WriteText(firstNameBy, firstName);
-        //}
-
-        ///// <summary>
-        ///// Metoda koja menja prezime korisnika
-        ///// </summary>
-        ///// <param name="lastName">Prezime</param>
-        //public void EnterLastName(string lastName)
-        //{
-        //    WriteText(lastNameBy, lastName);
-        //}
-
-        ///// <summary>
-        ///// Metoda koja menja email korisnika
-        ///// </summary>
-        ///// <param name="email">Korisnicki email</param>
-        //public void EnterEmail(string email)
-        //{
-        //    WriteText(emailBy, email);
-        //}
 
         /// <summary>
         /// Metoda koja vraca string iz telephone polja
@@ -74,7 +44,6 @@ namespace AutomationFramework.Pages
         public string EnterTelephone(string newTelephone)
         {
             string oldTelephone = GetTelephone();
-            //Thread.Sleep(1000);
             WriteText(telephoneBy, newTelephone);
             return oldTelephone;
         }

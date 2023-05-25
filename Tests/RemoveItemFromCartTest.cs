@@ -7,11 +7,12 @@ namespace AutomationFramework.Tests
         [SetUp]
         public void SetUp()
         {
+            // Loginovanje korisnika na nalog
             Pages.IndexPage.ClickOnLoginOrRegister();
-
             Pages.AccountPage.LoginUser(
                 TestData.User.Login.username,
                 TestData.User.Login.password);
+            // Navigiranje na index stranicu i stavljanje proizvoda u korpu
             Pages.IndexPage.ClickOnHomePageLink();
             Pages.IndexPage.AddProductFromIndex();
         }

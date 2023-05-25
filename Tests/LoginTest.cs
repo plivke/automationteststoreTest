@@ -35,14 +35,8 @@ namespace AutomationFramework.Tests
 
             // Asertacija = provera postojanja poruke za uspesno logovanje
             string expectedMsg = Constants.Messages.Error.incorrectlogin;
-            string actualMsg = Pages.AccountPage.GetErrorLoginMessage(); 
+            string actualMsg = Pages.AccountPage.GetErrorLoginMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
         }
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    // Logout korisnika
-        //    Pages.AccountLogoutPage.LogoutCustomer();
-        //}
     }
 }

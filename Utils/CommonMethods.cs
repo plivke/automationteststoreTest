@@ -11,12 +11,17 @@ namespace AutomationFramework.Utils
     public class CommonMethods
     {
         /// <summary>
-        /// Metoda koja ceka vidljivost elementa
+        /// Metoda koja ceka vidljivost elementa i vraca ga
         /// </summary>
+        /// <param name="driver">Driver</param>
         /// <param name="elementBy">Lokator elementa</param>
-        private static IWebElement WaitElementVisibility(IWebDriver driver, By elementBy, byte timespan = 5)
+        /// <param name="timespan">Vreme do prekida</param>
+        /// <param name="interval">Interval</param>
+        /// <returns>IWebElement element</returns>
+        private static IWebElement WaitElementVisibility(IWebDriver driver, By elementBy, byte timespan = 10, uint interval = 100)
         {
             WebDriverWait wait = new(driver, TimeSpan.FromSeconds(timespan));
+            wait.PollingInterval = TimeSpan.FromMilliseconds(interval);
             IWebElement element = wait.Until(ExpectedConditions.ElementToBeClickable(elementBy));
             return element;
         }
@@ -59,6 +64,8 @@ namespace AutomationFramework.Utils
         /// <summary>
         /// Metoda koja cita textualni sadrzaj elementa
         /// </summary>
+        /// <param name="driver">Driver</param>
+        /// <param name="elementBy">Lokator elementa</param>
         public static string ReadTextFromElement(IWebDriver driver, By elementBy)
         {
             return WaitElementVisibility(driver, elementBy).Text;
@@ -67,6 +74,8 @@ namespace AutomationFramework.Utils
         /// <summary>
         /// Metoda koja cita sadrzaj atributa value iz elementa
         /// </summary>
+        /// <param name="driver">Driver</param>
+        /// <param name="elementBy">Lokator elementa</param>
         public static string ReadValueFromElement(IWebDriver driver, By elementBy)
         {
             return WaitElementVisibility(driver, elementBy).GetAttribute("value");

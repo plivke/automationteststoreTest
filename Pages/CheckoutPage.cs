@@ -1,5 +1,7 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
+using SeleniumExtras.WaitHelpers;
+using System;
 
 namespace AutomationFramework.Pages
 {
@@ -28,6 +30,7 @@ namespace AutomationFramework.Pages
         readonly By orderProcessedMessageBy = By.XPath("//span[@class='maintext']");
         readonly By editShippingButtonBy = By.XPath("//a[contains(.,'Edit Shipping')]");
         readonly By checkoutConfirmationTitleBy = By.XPath("//span[contains(@class, 'maintext')]");
+        readonly By continueButtonBy = By.XPath("//a[@title='Continue']");
 
         /// <summary>
         /// Metoda koja postavlja valutu
@@ -61,7 +64,9 @@ namespace AutomationFramework.Pages
         /// <returns>poruku o uspesnoj porudzbini</returns>
         public string GetSuccessMessage()
         {
-            //Thread.Sleep(500);
+            _wait = new(_driver, TimeSpan.FromMilliseconds(2000));
+            _wait.PollingInterval = TimeSpan.FromMilliseconds(200);
+            _wait.Until(ExpectedConditions.ElementExists(continueButtonBy));
             return ReadText(orderProcessedMessageBy).Trim().ToLower();
         }
 

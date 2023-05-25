@@ -1,6 +1,5 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -50,7 +49,6 @@ namespace AutomationFramework.Pages
         /// </summary>
         public void ClickOnHomePageLink()
         {
-            //Thread.Sleep(500);
             ClickElement(homePageLinkBy);
         }
 
@@ -72,7 +70,6 @@ namespace AutomationFramework.Pages
         /// <param name="itemId">Id proizvoda</param>
         public void AddProductFromIndex(string itemId = "50")
         {
-            //Thread.Sleep(500);
             By item = By.XPath($"//a[@data-id='{itemId}']");
 
             if (CommonMethods.IsElementPresented(_driver, item))
@@ -95,7 +92,6 @@ namespace AutomationFramework.Pages
         /// <param name="itemName">Ime proizvoda</param>
         public void SearchProduct(string itemName = "New French With Ease")
         {
-            //Thread.Sleep(500);
             WriteText(searchBoxBy, itemName);
             ClickElement(searchButtonBy);
         }
@@ -106,7 +102,6 @@ namespace AutomationFramework.Pages
         /// <returns>broj proizvoda u korpi</returns>
         public byte CartBadgeCount()
         {
-            //Thread.Sleep(200);
             string countString = ReadText(cartBadgeBy);
             if (byte.TryParse(countString, out byte count))
             {

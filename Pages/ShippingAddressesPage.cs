@@ -1,15 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutomationFramework.Pages
 {
-    public class ShippingAddressesPage:BasePage
+    public class ShippingAddressesPage : BasePage
     {
         /// <summary>
         /// Konstruktor bez parametara
@@ -71,7 +66,6 @@ namespace AutomationFramework.Pages
         private void SelectCountry()
         {
             SelectRandomElement(countryBy);
-            Thread.Sleep(1000);
         }
 
         /// <summary>
@@ -92,7 +86,6 @@ namespace AutomationFramework.Pages
         /// </summary>
         private void SelectRegionState()
         {
-            Thread.Sleep(1000);
             SelectRandomElement(regionStateBy);
         }
 
@@ -147,6 +140,6 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja klikne na Continue dugme
         /// </summary>
-        public void ClickOnContinue() { Thread.Sleep(500); ClickElement(continueButtonBy); }
+        public void ClickOnContinue() { ClickElement(continueButtonBy); }
     }
 }

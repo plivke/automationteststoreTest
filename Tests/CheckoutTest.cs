@@ -47,8 +47,8 @@ namespace AutomationFramework.Tests
 
         [Test]
         public void PurchaseAsGuest()
-        { 
-            
+        {
+
             // Klik na dugme za kupovinu
             Pages.CartPage.ClickOnCheckout();
 

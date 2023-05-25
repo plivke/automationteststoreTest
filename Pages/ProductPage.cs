@@ -1,6 +1,5 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -54,7 +53,6 @@ namespace AutomationFramework.Pages
             {
                 ClickElement(removeFromWishlishBy);
             }
-            //Thread.Sleep(500);
             ClickElement(addToWishlistBy);
         }
 
@@ -69,7 +67,6 @@ namespace AutomationFramework.Pages
             {
                 ClickElement(addToWishlistBy);
             }
-            //Thread.Sleep(500);
             ClickElement(removeFromWishlishBy);
         }
     }

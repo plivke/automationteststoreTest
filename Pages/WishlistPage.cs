@@ -52,7 +52,7 @@ namespace AutomationFramework.Pages
             while (IsItemPresent())
             {
                 RemoveItemFromWishlist();
-                //Thread.Sleep(500);
+                _driver.Navigate().Refresh();
             }
         }
 
@@ -63,7 +63,6 @@ namespace AutomationFramework.Pages
         /// <returns>vraca poruku o praznoj Wishlist-i</returns>
         public string GetWishlistEmptyMessage()
         {
-            //Thread.Sleep(500);
             return ReadText(wishlistEmptyBy).Trim().ToLower();
         }
 

@@ -50,6 +50,7 @@ namespace AutomationFramework.Tests
         [TearDown]
         public void TearDown()
         {
+            // Sklanjaju se svi predmeti iz Wishlist-e
             Pages.WishlistPage.RemoveAllItemsFromWishlist();
         }
     }

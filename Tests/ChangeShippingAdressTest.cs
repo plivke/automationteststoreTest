@@ -1,13 +1,8 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomationFramework.Tests
 {
-    public class ChangeShippingAdressTest:BaseTest
+    public class ChangeShippingAdressTest : BaseTest
     {
         [SetUp]
         public void Setup()
@@ -15,7 +10,7 @@ namespace AutomationFramework.Tests
             //Dodavanje proizvoda u korpu preko indeksa
             Pages.IndexPage.AddProductFromIndex("65");
             Pages.IndexPage.AddProductFromIndex("52");
-            
+
             //Klik na link korpe
             Pages.IndexPage.ClickOnCartPageLink();
 

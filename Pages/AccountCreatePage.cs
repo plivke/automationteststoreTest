@@ -34,10 +34,8 @@ namespace AutomationFramework.Pages
         readonly By address2By = By.Id("AccountFrm_address_2");
         readonly By cityBy = By.Id("AccountFrm_city");
         readonly By regionStateBy = By.Id("AccountFrm_zone_id");
-        readonly By regionStateOptionsBy = By.XPath("//select[@id='AccountFrm_zone_id']/option");
         readonly By zipCodeBy = By.Id("AccountFrm_postcode");
         readonly By countryBy = By.Id("AccountFrm_country_id");
-        readonly By countryOptionsBy = By.XPath("select[@id='AccountFrm_country_id']/option");
         readonly By loginNameBy = By.Id("AccountFrm_loginname");
         readonly By passwordBy = By.Id("AccountFrm_password");
         readonly By passwordConfirmBy = By.Id("AccountFrm_confirm");
@@ -91,7 +89,6 @@ namespace AutomationFramework.Pages
         private void SelectCountry()
         {
             SelectRandomElement(countryBy);
-            //Thread.Sleep(1000);
         }
 
         /// <summary>
@@ -112,7 +109,6 @@ namespace AutomationFramework.Pages
         /// </summary>
         private void SelectRegionState()
         {
-            //Thread.Sleep(1000);
             SelectRandomElement(regionStateBy);
         }
 
@@ -188,7 +184,7 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja klikne na Continue dugme
         /// </summary>
-        private void ClickOnContinue() { /*Thread.Sleep(500);*/ ClickElement(continueButtonBy); }
+        private void ClickOnContinue() { ClickElement(continueButtonBy); }
 
         /// <summary>
         /// Metoda koja registruje korisnika tako sto popunjava sva neophodna
@@ -205,11 +201,11 @@ namespace AutomationFramework.Pages
             string password,
             bool subscription)
         {
+            SelectCountry();
             EnterFirstName(firstName);
             EnterLastName(lastName);
             EnterEmail(email);
             EnterAddress1(address1);
-            SelectCountry();
             SelectRegionState();
             EnterCity(city);
             EnterZipCode(zipCode);
