@@ -60,7 +60,7 @@ namespace AutomationFramework.Pages
         /// <returns>poruku o uspesnoj porudzbini</returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             return ReadText(orderProcessedMessageBy).Trim().ToLower();
         }
     }
