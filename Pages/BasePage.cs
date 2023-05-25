@@ -18,7 +18,7 @@ namespace AutomationFramework.Pages
         /// <param name="elementBy">Lokator elementa</param>
         public void ClickElement(By elementBy)
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             CommonMethods.ClickOnElement(_driver, elementBy);
         }
 
@@ -48,7 +48,7 @@ namespace AutomationFramework.Pages
         /// <param name="elementBy">Lokator elementa</param>
         public string ReadValue(By elementBy)
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             return CommonMethods.ReadValueFromElement(_driver, elementBy);
         }
 

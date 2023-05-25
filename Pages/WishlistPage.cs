@@ -1,6 +1,5 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -24,7 +23,7 @@ namespace AutomationFramework.Pages
         }
 
         // Locators
-        readonly By itemNameBy = By.XPath("//tr[2]/td[2]/a");
+        readonly By itemNameBy = By.XPath("//div[@id = 'maincontainer']//tr[2]/td[2]/a");
         readonly By removeButtonBy = By.XPath("//i[contains(@class, 'fa fa-trash-o fa-fw')][1]");
         readonly By wishlistEmptyBy = By.ClassName("contentpanel");
 
@@ -53,7 +52,7 @@ namespace AutomationFramework.Pages
             while (IsItemPresent())
             {
                 RemoveItemFromWishlist();
-                Thread.Sleep(500);
+                //Thread.Sleep(500);
             }
         }
 
@@ -64,7 +63,7 @@ namespace AutomationFramework.Pages
         /// <returns>vraca poruku o praznoj Wishlist-i</returns>
         public string GetWishlistEmptyMessage()
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             return ReadText(wishlistEmptyBy).Trim().ToLower();
         }
 

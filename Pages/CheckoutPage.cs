@@ -1,6 +1,5 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -60,7 +59,7 @@ namespace AutomationFramework.Pages
         /// <returns>poruku o uspesnoj porudzbini</returns>
         public string GetSuccessMessage()
         {
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             return ReadText(orderProcessedMessageBy).Trim().ToLower();
         }
     }

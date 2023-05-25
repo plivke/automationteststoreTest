@@ -1,6 +1,5 @@
 ﻿using AutomationFramework.Utils;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -35,7 +34,7 @@ namespace AutomationFramework.Pages
         /// <returns>true = korpa nije prazna || false = korpa je prazna</returns>
         public bool IsCartNotEmpty()
         {
-            Thread.Sleep(200);
+            //Thread.Sleep(200);
             return CommonMethods.IsElementPresented(_driver, totalsTableBy);
         }
 
