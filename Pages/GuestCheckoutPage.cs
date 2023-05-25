@@ -83,7 +83,7 @@ namespace AutomationFramework.Pages
         private void SelectCountry()
         {
             SelectRandomElement(countryBy);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace AutomationFramework.Pages
             {
                 SelectElement select = new(_driver.FindElement(countryBy));
                 select.SelectByText(country);
-                Thread.Sleep(200);
+                //Thread.Sleep(200);
             }
         }
 
@@ -105,7 +105,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         private void SelectRegionState()
         {
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             SelectRandomElement(regionStateBy);
         }
 

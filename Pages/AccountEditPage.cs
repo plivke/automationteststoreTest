@@ -75,7 +75,7 @@ namespace AutomationFramework.Pages
         public string EnterTelephone(string newTelephone)
         {
             string oldTelephone = GetTelephone();
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             WriteText(telephoneBy, newTelephone);
             return oldTelephone;
         }

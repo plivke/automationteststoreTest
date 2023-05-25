@@ -17,7 +17,7 @@ namespace AutomationFramework.Utils
         private static IWebElement WaitElementVisibility(IWebDriver driver, By elementBy, byte timespan = 5)
         {
             WebDriverWait wait = new(driver, TimeSpan.FromSeconds(timespan));
-            IWebElement element = wait.Until(ExpectedConditions.ElementIsVisible(elementBy));
+            IWebElement element = wait.Until(ExpectedConditions.ElementToBeClickable(elementBy));
             return element;
         }
 

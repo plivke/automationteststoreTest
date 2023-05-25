@@ -35,7 +35,7 @@ namespace AutomationFramework.Pages
         /// <returns>true = korpa nije prazna || false = korpa je prazna</returns>
         public bool IsCartNotEmpty()
         {
-            Thread.Sleep(200);
+            //Thread.Sleep(200);
             return CommonMethods.IsElementPresented(_driver, totalsTableBy);
         }
 
