@@ -30,9 +30,8 @@ namespace AutomationFramework.Tests
             Pages.IndexPage.ClickOnAccountLink();
             Pages.AccountPage.ClickOnWishlistLink();
             //Asertacija - provera da li je isti proizvod dodat u Wishlist-u
-            //string itemName = Pages.WishlistPage.GetItemName();
-            //Assert.AreEqual(_itemName, itemName);
-            Assert.IsTrue(Pages.WishlistPage.IsItemPresent());
+            string itemName = Pages.WishlistPage.GetItemName();
+            Assert.AreEqual(_itemName, itemName);
         }
 
         [Test]
