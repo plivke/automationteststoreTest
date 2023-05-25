@@ -67,9 +67,11 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja menja broj telefona korisnika
+        /// Metoda koja kupi sa input polja stari broj telefona
+        /// korisnika, a umesto njega u input polje upisuje novi
         /// </summary>
-        /// <param name = "newTelephone" > Broj telefona</param>
+        /// <param name = "newTelephone" >Novi broj telefona</param>
+        /// <returns>stari broj telefona</returns>
         public string EnterTelephone(string newTelephone)
         {
             string oldTelephone = GetTelephone();
@@ -79,9 +81,11 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja menja broj faksa korisnika
+        /// Metoda koja kupi sa input polja stari broj faksa
+        /// korisnika, a umesto njega u input polje upisuje novi
         /// </summary>
-        /// <param name = "newFax" > Broj faksa</param>
+        /// <param name = "newFax" >Novi faks</param>
+        /// <returns>stari faks</returns>
         public string EnterFax(string newFax)
         {
             string oldFax = ReadText(faxBy);

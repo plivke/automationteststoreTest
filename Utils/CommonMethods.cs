@@ -57,7 +57,7 @@ namespace AutomationFramework.Utils
         }
 
         /// <summary>
-        /// Metoda koja cita text iz elementa
+        /// Metoda koja cita textualni sadrzaj elementa
         /// </summary>
         public static string ReadTextFromElement(IWebDriver driver, By elementBy)
         {
@@ -65,7 +65,7 @@ namespace AutomationFramework.Utils
         }
 
         /// <summary>
-        /// Metoda koja cita text iz elementa
+        /// Metoda koja cita sadrzaj atributa value iz elementa
         /// </summary>
         public static string ReadValueFromElement(IWebDriver driver, By elementBy)
         {

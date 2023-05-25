@@ -1,13 +1,12 @@
 ﻿using AutomationFramework.Utils;
 using NUnit.Framework;
 using System.Linq;
-using System.Security.Policy;
 
 namespace AutomationFramework.Tests
 {
     public class AccountForgottenTest : BaseTest
     {
-        // Generisanje jedinstvenih podataka za registraciju
+        // Generisanje slucajnih podataka za registraciju
         static string _firstName = TestData.User.AccountForgotten.firstName;
         static string _loginName = CommonMethods.GenerateRandomUsername(_firstName);
         string _lastName = TestData.User.AccountForgotten.lastName;
@@ -62,6 +61,16 @@ namespace AutomationFramework.Tests
             string expectedMsg = Constants.Messages.Success.loginRemider.Trim().ToLower();
             string actualMsg = Pages.AccountForgottenPage.GetSuccessMessage();
             Assert.AreEqual(expectedMsg, actualMsg);
+        }
+
+        [TearDown]
+        public void TeraDown()
+        {
+            // U teardown-u se dodeljuje nova vrednost email-u i username-u kako be bi doslo
+            // do greske prilikom registracije sa istim kredencijalima
+            _email = CommonMethods.GenerateRandomUsername(_firstName) +
+                CommonMethods.GetRandomItemFromList((TestData.User.Registration.emailSufix).ToList());
+            _loginName = CommonMethods.GenerateRandomUsername(_lastName);
         }
     }
 }

@@ -6,8 +6,9 @@ namespace AutomationFramework.Tests
 {
     public class SearchItemTest : BaseTest
     {
+        // Uzimanje slucajno izabranog imena kao predmet pretrage
         static readonly string _searchItem =
-            CommonMethods.GetRandomItemFromList(TestData.Search.Items.itemName.ToList<string>());
+            CommonMethods.GetRandomItemFromList(TestData.Search.Items.itemName.ToList());
 
         [Test]
         public void SearchItem()

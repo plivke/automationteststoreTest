@@ -31,16 +31,16 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja upisuje staru sifru u odgovarajuce input polje
         /// </summary>
-        /// <param name="oldPass"></param>
+        /// <param name="oldPass">Stara korisnicka sifra</param>
         private void EnterOldPassword(string oldPass)
         {
             WriteText(oldPasswordBy, oldPass);
         }
 
         /// <summary>
-        /// Metoda koja upisuje novu sifru u odgovarajuce input polje
+        /// Metoda koja upisuje novu sifru u dva odgovarajuca input polja
         /// </summary>
-        /// <param name="oldPass"></param>
+        /// <param name="newPass">Nova korisnicka sifra</param>
         private void EnterAndConfirmPassword(string newPass)
         {
             WriteText(newPasswordBy, newPass);
@@ -56,10 +56,11 @@ namespace AutomationFramework.Pages
         }
 
         /// <summary>
-        /// Metoda koja menja sifru
+        /// Metoda koja menja korisnikovu sifru nakon cega
+        /// klikne na Continue dugme
         /// </summary>
-        /// <param name="oldPass">Stari korisnicki pass</param>
-        /// <param name="newPass"></param>
+        /// <param name="oldPass">Stari korisnicki sifra</param>
+        /// <param name="newPass">Nova korisnicka sifra</param>
         public void ChangePassword(string oldPass, string newPass)
         {
             EnterOldPassword(oldPass);
@@ -67,6 +68,10 @@ namespace AutomationFramework.Pages
             ClickOnContinue();
         }
 
+        /// <summary>
+        /// Metoda koja vraca poruku o uspesno izmenjenoj sifri
+        /// </summary>
+        /// <returns>poruka o uspehu</returns>
         public string GetSuccessMessage()
         {
             return ReadText(successMessageBy).Trim().ToLower();
