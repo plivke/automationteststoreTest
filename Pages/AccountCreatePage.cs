@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 
 namespace AutomationFramework.Pages
 {
@@ -92,7 +91,7 @@ namespace AutomationFramework.Pages
         private void SelectCountry()
         {
             SelectRandomElement(countryBy);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
         }
 
         /// <summary>
@@ -113,7 +112,7 @@ namespace AutomationFramework.Pages
         /// </summary>
         private void SelectRegionState()
         {
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             SelectRandomElement(regionStateBy);
         }
 
@@ -189,7 +188,7 @@ namespace AutomationFramework.Pages
         /// <summary>
         /// Metoda koja klikne na Continue dugme
         /// </summary>
-        private void ClickOnContinue() { Thread.Sleep(500); ClickElement(continueButtonBy); }
+        private void ClickOnContinue() { /*Thread.Sleep(500);*/ ClickElement(continueButtonBy); }
 
         /// <summary>
         /// Metoda koja registruje korisnika tako sto popunjava sva neophodna

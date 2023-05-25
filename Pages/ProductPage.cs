@@ -54,7 +54,7 @@ namespace AutomationFramework.Pages
             {
                 ClickElement(removeFromWishlishBy);
             }
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             ClickElement(addToWishlistBy);
         }
 
@@ -69,7 +69,7 @@ namespace AutomationFramework.Pages
             {
                 ClickElement(addToWishlistBy);
             }
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             ClickElement(removeFromWishlishBy);
         }
     }
