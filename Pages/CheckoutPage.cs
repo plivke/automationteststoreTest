@@ -27,6 +27,8 @@ namespace AutomationFramework.Pages
         readonly By currencyListBy = By.XPath("//div[@class='block_6']");
         readonly By checkoutButtonBy = By.Id("checkout_btn");
         readonly By orderProcessedMessageBy = By.XPath("//span[@class='maintext']");
+        readonly By editShippingButtonBy = By.XPath("//a[contains(.,'Edit Shipping')]");
+        readonly By checkoutConfirmationTitleBy = By.XPath("//span[contains(@class, 'maintext')]");
 
         /// <summary>
         /// Metoda koja postavlja valutu
@@ -62,6 +64,16 @@ namespace AutomationFramework.Pages
         {
             Thread.Sleep(500);
             return ReadText(orderProcessedMessageBy).Trim().ToLower();
+        }
+
+        public void ClickOnEditShippingButton()
+        {
+            ClickElement(editShippingButtonBy);
+        }
+
+        public bool IsItemPresent()
+        {
+            return CommonMethods.IsElementPresented(_driver, checkoutConfirmationTitleBy);
         }
     }
 }
